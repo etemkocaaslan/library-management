@@ -68,12 +68,10 @@ namespace WinFormsApp2
 
         private void ToolBarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            toolStrip.Visible = toolBarToolStripMenuItem.Checked;
         }
 
         private void StatusBarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            statusStrip.Visible = statusBarToolStripMenuItem.Checked;
         }
 
         private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -102,6 +100,18 @@ namespace WinFormsApp2
             {
                 childForm.Close();
             }
+        }
+
+        private void addNewBooksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddBooks addBooks = new AddBooks();
+            addBooks.Show();
+        }
+
+        private void viewBooksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ViewBooks viewBooks = new ViewBooks();
+            viewBooks.Show();
         }
     }
 }
