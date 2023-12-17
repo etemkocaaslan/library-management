@@ -1,7 +1,3 @@
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
 namespace WinFormsApp2
 {
     public partial class Login : Form
@@ -10,11 +6,9 @@ namespace WinFormsApp2
         public Login()
         {
             InitializeComponent();
-
-
         }
 
-        private void bt1_Click(object sender, EventArgs e)
+        private void Bt1_Click(object sender, EventArgs e)
         {
             Model.InitializeConnection("Data Source=DESKTOP-SR937O1;Initial Catalog=libmanag;Integrated Security=True");
             string query = "select * from library_person where username='" + tb1.Text + "' and password='" + tb2.Text + "'";
@@ -26,7 +20,7 @@ namespace WinFormsApp2
             else
             {
                 this.Hide();
-                mdi_user mu = new mdi_user();
+                mdi_user mu = new();
                 mu.Show();
             }
         }
