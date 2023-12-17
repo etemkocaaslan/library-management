@@ -107,7 +107,7 @@
             bt1.TabIndex = 10;
             bt1.Text = "LOGIN";
             bt1.UseVisualStyleBackColor = false;
-            bt1.Click += bt1_Click;
+            bt1.Click += Bt1_Click;
             // 
             // lb2
             // 

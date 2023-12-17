@@ -62,14 +62,14 @@
             addNewBooksToolStripMenuItem.Name = "addNewBooksToolStripMenuItem";
             addNewBooksToolStripMenuItem.Size = new Size(180, 22);
             addNewBooksToolStripMenuItem.Text = "Add New Books";
-            addNewBooksToolStripMenuItem.Click += addNewBooksToolStripMenuItem_Click;
+            addNewBooksToolStripMenuItem.Click += AddNewBooksToolStripMenuItem_Click;
             // 
             // viewBooksToolStripMenuItem
             // 
             viewBooksToolStripMenuItem.Name = "viewBooksToolStripMenuItem";
             viewBooksToolStripMenuItem.Size = new Size(180, 22);
             viewBooksToolStripMenuItem.Text = "View Books";
-            viewBooksToolStripMenuItem.Click += viewBooksToolStripMenuItem_Click;
+            viewBooksToolStripMenuItem.Click += ViewBooksToolStripMenuItem_Click;
             // 
             // statusStrip
             // 

@@ -116,7 +116,7 @@
             bt1.TabIndex = 12;
             bt1.Text = "SAVE";
             bt1.UseVisualStyleBackColor = false;
-            bt1.Click += bt1_Click;
+            bt1.Click += Bt1_Click;
             // 
             // tb1
             // 
@@ -186,7 +186,6 @@
             Controls.Add(lb1);
             Name = "AddBooks";
             Text = "Add Books";
-            Load += AddBooks_Load;
             ResumeLayout(false);
             PerformLayout();
         }
