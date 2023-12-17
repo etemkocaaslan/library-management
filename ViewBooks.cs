@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace WinFormsApp2
+﻿namespace WinFormsApp2
 {
     public partial class ViewBooks : Form
     {
@@ -17,14 +7,16 @@ namespace WinFormsApp2
             InitializeComponent();
             Model.InitializeConnection("Data Source=DESKTOP-SR937O1;Initial Catalog=libmanag;Integrated Security=True");
 
+
         }
-        private void ViewBooks_Load(object sender, EventArgs e)
+
+        private void Bt1_Click(object sender, EventArgs e)
         {
             try
             {
-                dataGridView1.DataSource = Model.ExecuteQuery("select * from books_info");
+                dgw1.DataSource = Model.ExecuteQuery("select * from  books_info where name like('%" + tb1.Text + "%')");
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
