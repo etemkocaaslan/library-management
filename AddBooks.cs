@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace WinFormsApp2
+﻿namespace WinFormsApp2
 {
     public partial class AddBooks : Form
     {
@@ -17,12 +7,7 @@ namespace WinFormsApp2
             InitializeComponent();
         }
 
-        private void AddBooks_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt1_Click(object sender, EventArgs e)
+        private void Bt1_Click(object sender, EventArgs e)
         {
             try
             {
