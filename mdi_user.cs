@@ -100,7 +100,7 @@
 
         private void AddNewBooksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddBooks addBooks = new();
+            AddBook addBooks = new();
             addBooks.Show();
         }
 
@@ -108,6 +108,12 @@
         {
             ViewBooks viewBooks = new();
             viewBooks.Show();
+        }
+
+        private void addStudentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddStudent addStudent = new();
+            addStudent.Show();
         }
     }
 }
