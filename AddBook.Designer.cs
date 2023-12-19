@@ -1,6 +1,6 @@
 ﻿namespace WinFormsApp2
 {
-    partial class AddBooks
+    partial class AddBook
     {
         /// <summary>
         /// Required designer variable.
