@@ -58,7 +58,6 @@ namespace WinFormsApp2
         {
             return (openImageFileDialog.ShowDialog() == DialogResult.OK) ? new Bitmap(openImageFileDialog.FileName) : null;
         }
-
         public static SqlConnection? Connection => connection;
     }
 }
