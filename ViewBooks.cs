@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Data.SqlClient;
 
 namespace WinFormsApp2
 {
@@ -37,24 +38,39 @@ namespace WinFormsApp2
 
         private void Dgw1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+
             pn2.Visible = true;
 
-            var selectedCells_ID = dgw1.SelectedCells[0].Value;
-            DataTable table = Model.ExecuteQuery("select * from  books_info where id=" + selectedCells_ID + "");
+            var selectedId = dgw1.Rows[e.RowIndex].Cells[0].Value;
+            string sql = "SELECT * FROM books_info WHERE Id = @id";
+            var parameters = new[] { new SqlParameter("@id", selectedId) };
 
-            if (table != null)
+            try
             {
-                foreach (DataRow row in table.Rows)
+                DataTable table = Model.ExecuteQuery(sql, parameters);
+                if (table.Rows.Count > 0)
                 {
-                    tb3.Text = row["name"].ToString().TrimEnd();
-                    tb4.Text = row["author"].ToString().TrimEnd();
-                    tb5.Text = row["publisher"].ToString().TrimEnd();
-                    dtp1.Value = Convert.ToDateTime(row["purchase_date"].ToString());
-                    tb6.Text = row["price"].ToString().TrimEnd();
-                    tb7.Text = row["quantity"].ToString().TrimEnd();
+                    DataRow row = table.Rows[0];
+                    PopulateFields(row);
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
         }
+
+        private void PopulateFields(DataRow row)
+        {
+            tb3.Text = row["name"]?.ToString()?.TrimEnd();
+            tb4.Text = row["author"]?.ToString()?.TrimEnd();
+            tb5.Text = row["publisher"]?.ToString()?.TrimEnd();
+            dtp1.Value = Convert.ToDateTime(row["purchase_date"]);
+            tb6.Text = row["price"]?.ToString()?.TrimEnd();
+            tb7.Text = row["quantity"]?.ToString()?.TrimEnd();
+        }
+
 
         private void Bt3_Click(object sender, EventArgs e)
         {
