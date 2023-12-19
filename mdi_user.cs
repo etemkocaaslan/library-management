@@ -110,10 +110,16 @@
             viewBooks.Show();
         }
 
-        private void addStudentToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AddStudentToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddStudent addStudent = new();
             addStudent.Show();
+        }
+
+        private void ViewStudentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ViewStudent viewStudent = new();
+            viewStudent.Show();
         }
     }
 }
