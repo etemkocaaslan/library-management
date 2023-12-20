@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             lb1 = new Label();
             lb2 = new Label();
             lb4 = new Label();
@@ -41,6 +42,8 @@
             tb5 = new TextBox();
             tb6 = new TextBox();
             dtp1 = new DateTimePicker();
+            errorProvider1 = new ErrorProvider(components);
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // lb1
@@ -165,7 +168,11 @@
             dtp1.Size = new Size(136, 23);
             dtp1.TabIndex = 19;
             // 
-            // AddBooks
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
+            // 
+            // AddBook
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -184,8 +191,9 @@
             Controls.Add(lb3);
             Controls.Add(lb2);
             Controls.Add(lb1);
-            Name = "AddBooks";
+            Name = "AddBook";
             Text = "Add Books";
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -204,5 +212,6 @@
         private TextBox tb5;
         private TextBox tb6;
         private DateTimePicker dtp1;
+        private ErrorProvider errorProvider1;
     }
 }
