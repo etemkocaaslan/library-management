@@ -15,20 +15,23 @@ namespace WinFormsApp2
         {
             try
             {
-                dgw1.DataSource = Model.ExecuteQuery("select * from  books_info where name like('%" + tb1.Text + "%')");
+                string query = "SELECT * FROM books_info WHERE name LIKE @name";
+                var parameters = new[] { new SqlParameter("@name", "%" + tb1.Text + "%") };
+                dgw1.DataSource = Model.ExecuteQuery(query, parameters);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            pn2.Visible = false;
         }
 
         private void Bt2_Click(object sender, EventArgs e)
         {
             try
             {
-                dgw1.DataSource = Model.ExecuteQuery("select * from  books_info where author like('%" + tb2.Text + "%')");
+                string query = "SELECT * FROM books_info WHERE author LIKE @author";
+                var parameters = new[] { new SqlParameter("@author", tb2.Text) };
+                dgw1.DataSource = Model.ExecuteQuery(query, parameters);
             }
             catch (Exception ex)
             {
@@ -76,14 +79,26 @@ namespace WinFormsApp2
         {
             try
             {
-                Model.ExecuteNonQuery("update books_info set name='" + tb3.Text + "',author='" + tb4.Text + "',publisher='" + tb5.Text + "',purchase_date='" + dtp1.Text + "',price='" + tb6.Text + "',quantity='" + tb7.Text + "'where id='" + dgw1.SelectedCells[0].Value + "'");
+                string updateQuery = "UPDATE books_info SET name = @name, author = @author, publisher = @publisher, purchase_date = @purchaseDate, price = @price, quantity = @quantity WHERE id = @id";
+
+                var updateParameters = new[]
+                {
+                    new SqlParameter("@name", tb3.Text),
+                    new SqlParameter("@author", tb4.Text),
+                    new SqlParameter("@publisher", tb5.Text),
+                    new SqlParameter("@purchaseDate", dtp1.Value),
+                    new SqlParameter("@price", tb6.Text),
+                    new SqlParameter("@quantity", tb7.Text),
+                    new SqlParameter("@id", dgw1.SelectedCells[0].Value)
+                };
+
+                Model.ExecuteNonQuery(updateQuery, updateParameters);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            Bt1_Click(sender, e);
-
+            pn2.Visible = false;
         }
     }
 }
