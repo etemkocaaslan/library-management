@@ -7,7 +7,6 @@ namespace WinFormsApp2
     {
         private static SqlConnection? connection;
         private static readonly string image_path = @"C:\Users\kasla\MyProjects\library_management\WinFormsApp2\images\";
-        private static MemoryStream? memoryStream;
         private static readonly OpenFileDialog openImageFileDialog = new()
         {
             Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp",
@@ -23,8 +22,9 @@ namespace WinFormsApp2
         public static DataTable ExecuteQuery(string query, params SqlParameter[] parameters)
         {
             EnsureConnection();
+
             using var command = new SqlCommand(query, connection);
-            foreach (var parameter in parameters)
+            foreach (SqlParameter parameter in parameters)
             {
                 command.Parameters.Add(parameter);
             }
@@ -39,9 +39,12 @@ namespace WinFormsApp2
         public static int ExecuteNonQuery(string commandText, params SqlParameter[] parameters)
         {
             EnsureConnection();
+
             using SqlCommand command = new(commandText, connection);
-            foreach (var parameter in parameters)
+            foreach (SqlParameter parameter in parameters)
+            {
                 command.Parameters.Add(parameter);
+            }
 
             return command.ExecuteNonQuery();
         }
