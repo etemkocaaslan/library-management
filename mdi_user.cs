@@ -121,5 +121,11 @@
             ViewStudent viewStudent = new();
             viewStudent.Show();
         }
+
+        private void NewIssueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IssueBook issueBook = new IssueBook();
+            issueBook.Show();
+        }
     }
 }
