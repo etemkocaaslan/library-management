@@ -1,10 +1,10 @@
 ﻿namespace WinFormsApp2
 {
-    public partial class mdi_user : Form
+    public partial class MDIuser : Form
     {
         private int childFormNumber = 0;
 
-        public mdi_user()
+        public MDIuser()
         {
             InitializeComponent();
         }
