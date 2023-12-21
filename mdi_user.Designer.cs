@@ -39,6 +39,7 @@
             statusStrip = new StatusStrip();
             toolStripStatusLabel = new ToolStripStatusLabel();
             toolTip = new ToolTip(components);
+            newIssueToolStripMenuItem = new ToolStripMenuItem();
             menuStrip.SuspendLayout();
             statusStrip.SuspendLayout();
             SuspendLayout();
@@ -55,7 +56,7 @@
             // 
             // booksToolStripMenuItem
             // 
-            booksToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addNewBooksToolStripMenuItem, viewBooksToolStripMenuItem });
+            booksToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { addNewBooksToolStripMenuItem, viewBooksToolStripMenuItem, newIssueToolStripMenuItem });
             booksToolStripMenuItem.Name = "booksToolStripMenuItem";
             booksToolStripMenuItem.Size = new Size(51, 20);
             booksToolStripMenuItem.Text = "Books";
@@ -63,15 +64,15 @@
             // addNewBooksToolStripMenuItem
             // 
             addNewBooksToolStripMenuItem.Name = "addNewBooksToolStripMenuItem";
-            addNewBooksToolStripMenuItem.Size = new Size(151, 22);
-            addNewBooksToolStripMenuItem.Text = "Add new book";
+            addNewBooksToolStripMenuItem.Size = new Size(180, 22);
+            addNewBooksToolStripMenuItem.Text = "New Book";
             addNewBooksToolStripMenuItem.Click += AddNewBooksToolStripMenuItem_Click;
             // 
             // viewBooksToolStripMenuItem
             // 
             viewBooksToolStripMenuItem.Name = "viewBooksToolStripMenuItem";
-            viewBooksToolStripMenuItem.Size = new Size(151, 22);
-            viewBooksToolStripMenuItem.Text = "View Books";
+            viewBooksToolStripMenuItem.Size = new Size(180, 22);
+            viewBooksToolStripMenuItem.Text = "View Book";
             viewBooksToolStripMenuItem.Click += ViewBooksToolStripMenuItem_Click;
             // 
             // studentsToolStripMenuItem
@@ -84,14 +85,14 @@
             // addStudentToolStripMenuItem
             // 
             addStudentToolStripMenuItem.Name = "addStudentToolStripMenuItem";
-            addStudentToolStripMenuItem.Size = new Size(180, 22);
+            addStudentToolStripMenuItem.Size = new Size(164, 22);
             addStudentToolStripMenuItem.Text = "Add new student";
             addStudentToolStripMenuItem.Click += AddStudentToolStripMenuItem_Click;
             // 
             // viewStudentToolStripMenuItem
             // 
             viewStudentToolStripMenuItem.Name = "viewStudentToolStripMenuItem";
-            viewStudentToolStripMenuItem.Size = new Size(180, 22);
+            viewStudentToolStripMenuItem.Size = new Size(164, 22);
             viewStudentToolStripMenuItem.Text = "View students";
             viewStudentToolStripMenuItem.Click += ViewStudentToolStripMenuItem_Click;
             // 
@@ -110,6 +111,13 @@
             toolStripStatusLabel.Name = "toolStripStatusLabel";
             toolStripStatusLabel.Size = new Size(39, 17);
             toolStripStatusLabel.Text = "Status";
+            // 
+            // newIssueToolStripMenuItem
+            // 
+            newIssueToolStripMenuItem.Name = "newIssueToolStripMenuItem";
+            newIssueToolStripMenuItem.Size = new Size(180, 22);
+            newIssueToolStripMenuItem.Text = "New Issue";
+            newIssueToolStripMenuItem.Click += NewIssueToolStripMenuItem_Click;
             // 
             // mdi_user
             // 
@@ -143,6 +151,7 @@
         private ToolStripMenuItem studentsToolStripMenuItem;
         private ToolStripMenuItem addStudentToolStripMenuItem;
         private ToolStripMenuItem viewStudentToolStripMenuItem;
+        private ToolStripMenuItem newIssueToolStripMenuItem;
     }
 }
 
