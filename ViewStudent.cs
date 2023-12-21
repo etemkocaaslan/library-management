@@ -24,7 +24,7 @@ namespace WinFormsApp2
             pn2.Visible = false;
         }
 
-        private void bt2_Click(object sender, EventArgs e)
+        private void Bt2_Click(object sender, EventArgs e)
         {
             try
             {
@@ -80,8 +80,22 @@ namespace WinFormsApp2
         //    tb8.Text = row["email"]?.ToString()?.TrimEnd();
         //}
 
-        private void dgw1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void Dgw1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+
+        private void Bt3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Model.ExecuteNonQuery("UPDATE Student SET name='" + tb3.Text + "',enrollment_no='" + tb4.Text + "',department='" + tb5.Text + "',sem='" + tb6.Text + "',contact='" + tb7.Text + "',email='" + tb8.Text + "'where id='" + dgw1.SelectedCells[0].Value + "'");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            Bt1_Click(sender, e);
 
         }
     }
