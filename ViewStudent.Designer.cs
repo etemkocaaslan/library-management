@@ -84,7 +84,7 @@
             bt2.TabIndex = 16;
             bt2.Text = "SEARCH";
             bt2.UseVisualStyleBackColor = false;
-            bt2.Click += bt2_Click;
+            bt2.Click += Bt2_Click;
             // 
             // tb2
             // 
@@ -150,7 +150,7 @@
             dgw1.Size = new Size(666, 393);
             dgw1.TabIndex = 3;
             dgw1.CellClick += Dgw1_CellClick;
-            dgw1.CellContentClick += dgw1_CellContentClick;
+            dgw1.CellContentClick += Dgw1_CellContentClick;
             // 
             // lb3
             // 
@@ -260,6 +260,7 @@
             bt3.TabIndex = 32;
             bt3.Text = "UPDATE";
             bt3.UseVisualStyleBackColor = false;
+            bt3.Click += Bt3_Click;
             // 
             // pn2
             // 
