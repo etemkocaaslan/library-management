@@ -1,10 +1,13 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using System.Web;
 
 namespace WinFormsApp2
 {
     public partial class IssueBook : Form
     {
+        private List<SqlParameter[]> paramatersList = new();
+
         public IssueBook()
         {
             InitializeComponent();
@@ -16,7 +19,13 @@ namespace WinFormsApp2
             DataTable issuedbooksDT = new();
             try
             {
-                issuedbooksDT = Model.ExecuteQuery("SELECT * FROM issue_books WHERE student_enrollment_no like('%" + tb1.Text + "%')");
+                string query = "SELECT * FROM issue_books WHERE student_enrollment_no LIKE @student_enrollment_no";
+                var parameters = new[]
+                {
+                    new SqlParameter("@student_enrollment_no", tb1.Text)
+                };
+
+                issuedbooksDT = Model.ExecuteQuery(query, parameters);
             }
             catch (Exception ex)
             {
@@ -29,26 +38,29 @@ namespace WinFormsApp2
             }
         }
 
-        private void TextBox1_KeyUp(object sender, KeyEventArgs e)
+        private async void Tb2KeyUp(object sender, KeyEventArgs e)
         {
             lbx1.Visible = true;
-            lbx1.Items.Clear();
-            DataTable issuedbooksDT;
+            DataTable issuedbooksDT = new();
             try
             {
-                issuedbooksDT = Model.ExecuteQuery("SELECT * FROM books_info WHERE name like('%" + tb2.Text + "%')");
+                lbx1.DisplayMember = "DisplayColumn";
+                lbx1.ValueMember = "id";
+
+                string query = "SELECT * FROM books_info WHERE name LIKE @name";
+                var parameters = new[]
+                {
+                    new SqlParameter("@name", "%" + tb2.Text + "%")
+                };
+
+                issuedbooksDT = await Task.Run(() => Model.ExecuteQuery(query, parameters));
+                issuedbooksDT.Columns.Add("DisplayColumn", typeof(string), "id + '-' + name");
+                lbx1.DataSource = issuedbooksDT;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                return;
             }
-
-            foreach (DataRow row in issuedbooksDT.Rows)
-            {
-                lbx1.Items.Add(row["id"] + "-" + row["name"].ToString());
-            }
-
         }
 
 
@@ -85,7 +97,22 @@ namespace WinFormsApp2
         }
         private void Bt2_Click(object sender, EventArgs e)
         {
-            lv2.Items.Add(lbx1.SelectedItems.ToString());
+            lv2.Columns.Add("Book ID", -2, HorizontalAlignment.Left);
+            lv2.Columns.Add("Book Name", -2, HorizontalAlignment.Left);
+
+            string[] txtParts = tb2.Text.Split('-');
+            if (txtParts.Length == 2)
+            {
+
+                ListViewItem item = new(txtParts[1].Trim());
+                item.SubItems.Add(txtParts[0].Trim());
+                lv2.Items.Add(item);
+            }
+            else
+            {
+                MessageBox.Show("Not a valid entry");
+            }
+            tb2.Clear();
         }
 
         private void Bt3_Click(object sender, EventArgs e)
@@ -93,23 +120,35 @@ namespace WinFormsApp2
             try
             {
                 string commandTxt = "Insert into issue_books(student_enrollment_no, book_id, book_name) Values(@student_enrollment_no, @book_id, @book_name)";
-                List<SqlParameter[]> paramatersList = new();
-                var parameters = new[]
+                paramatersList = new List<SqlParameter[]>();
+
+                foreach (ListViewItem item in lv2.Items)
                 {
-                    new SqlParameter("@student_enrollment_no", tb1.Text),
-                    new SqlParameter("@book_id", lbx1.Text.Split("-")[0]),
-                    new SqlParameter("@book_name", lbx1.Text.Split("-")[1].Trim()),
-                };
-                Model.ExecuteNonQuery(commandTxt, parameters);
-                foreach (var item in lv2.Items)
+                    paramatersList.Add(GetSqlParameter(item));
+                }
+
+                foreach (SqlParameter[] parameters in paramatersList)
                 {
-                    //buradaydin
+                    Model.ExecuteNonQuery(commandTxt, parameters);
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}");
             }
+
+            pn1.Visible = false;
+            lv2.Clear();
+            lb1.Refresh();
+        }
+        private SqlParameter[] GetSqlParameter(ListViewItem listViewItem)
+        {
+            return new SqlParameter[]
+                        {
+                        new SqlParameter("@student_enrollment_no", tb1.Text.TrimEnd()),
+                        new SqlParameter("@book_id", listViewItem.SubItems[1].Text.TrimEnd()),
+                        new SqlParameter("@book_name", listViewItem.Text.TrimEnd())
+                        };
         }
 
         private void Lbx1_DoubleClick(object sender, EventArgs e)
