@@ -40,11 +40,11 @@
             lb1 = new Label();
             lv1 = new ListView();
             lv2 = new ListView();
+            ID = new ColumnHeader();
+            Name = new ColumnHeader();
             lb4 = new Label();
             lb5 = new Label();
             bt3 = new Button();
-            ID = new ColumnHeader();
-            Name = new ColumnHeader();
             pn1.SuspendLayout();
             SuspendLayout();
             // 
