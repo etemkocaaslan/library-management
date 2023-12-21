@@ -20,7 +20,7 @@ namespace WinFormsApp2
             try
             {
                 string query = "SELECT * FROM issue_books WHERE student_enrollment_no LIKE @student_enrollment_no";
-                var parameters = new[]
+                SqlParameter[] parameters = new[]
                 {
                     new SqlParameter("@student_enrollment_no", tb1.Text)
                 };
@@ -48,9 +48,9 @@ namespace WinFormsApp2
                 lbx1.ValueMember = "id";
 
                 string query = "SELECT * FROM books_info WHERE name LIKE @name";
-                var parameters = new[]
+                SqlParameter[] parameters = new[]
                 {
-                    new SqlParameter("@name", "%" + tb2.Text + "%")
+                    new SqlParameter("@name", tb2.Text)
                 };
 
                 issuedbooksDT = await Task.Run(() => Model.ExecuteQuery(query, parameters));
@@ -64,13 +64,20 @@ namespace WinFormsApp2
         }
 
 
-        private void Bt1_Click(object sender, EventArgs e)
+        private async void Bt1_Click(object sender, EventArgs e)
         {
             if (tb1.TextLength > 0)
             {
+                DataTable paramatersList = new();
                 try
                 {
-                    using DataTable dt = (DataTable)Model.ExecuteQuery("SELECT * FROM  STUDENT WHERE enrollment_no like('%" + tb1.Text + "%')");
+                    string query = "SELECT * FROM Student WHERE enrollment_no LIKE @enrollment_no";
+                    SqlParameter[] parameters = new[]
+                    {
+                        new SqlParameter("@enrollment_no", tb2.Text)
+                    };
+
+                    paramatersList = await Task.Run(() => Model.ExecuteQuery(query, parameters));
                     pn1.Visible = true;
 
                     lv1.Clear();
@@ -79,6 +86,7 @@ namespace WinFormsApp2
                     lb5.Visible = true;
                     lv1.Visible = true;
                     lv2.Visible = true;
+                    bt3.Visible = true;
                 }
                 catch (Exception ex)
                 {
@@ -92,6 +100,7 @@ namespace WinFormsApp2
                 lb5.Visible = false;
                 lv1.Visible = false;
                 lv2.Visible = false;
+                bt3.Visible = false;
             }
 
         }
@@ -134,7 +143,7 @@ namespace WinFormsApp2
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show(ex.Message);
             }
 
             pn1.Visible = false;
@@ -144,11 +153,11 @@ namespace WinFormsApp2
         private SqlParameter[] GetSqlParameter(ListViewItem listViewItem)
         {
             return new SqlParameter[]
-                        {
-                        new SqlParameter("@student_enrollment_no", tb1.Text.TrimEnd()),
-                        new SqlParameter("@book_id", listViewItem.SubItems[1].Text.TrimEnd()),
-                        new SqlParameter("@book_name", listViewItem.Text.TrimEnd())
-                        };
+            {
+                new SqlParameter("@student_enrollment_no", tb1.Text.TrimEnd()),
+                new SqlParameter("@book_id", listViewItem.SubItems[1].Text.TrimEnd()),
+                new SqlParameter("@book_name", listViewItem.Text.TrimEnd())
+            };
         }
 
         private void Lbx1_DoubleClick(object sender, EventArgs e)

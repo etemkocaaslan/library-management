@@ -41,7 +41,6 @@
             lv1 = new ListView();
             lv2 = new ListView();
             ID = new ColumnHeader();
-            Name = new ColumnHeader();
             lb4 = new Label();
             lb5 = new Label();
             bt3 = new Button();
@@ -175,7 +174,7 @@
             // lv2
             // 
             lv2.BackColor = SystemColors.Control;
-            lv2.Columns.AddRange(new ColumnHeader[] { ID, Name });
+            lv2.Columns.AddRange(new ColumnHeader[] { ID });
             lv2.Location = new Point(12, 208);
             lv2.Name = "lv2";
             lv2.Size = new Size(240, 105);
@@ -218,6 +217,7 @@
             bt3.TabIndex = 25;
             bt3.Text = "Add";
             bt3.UseVisualStyleBackColor = false;
+            bt3.Visible = false;
             bt3.Click += Bt3_Click;
             // 
             // IssueBook
@@ -259,6 +259,5 @@
         private Button bt2;
         private Button bt3;
         private ColumnHeader ID;
-        private ColumnHeader Name;
     }
 }
