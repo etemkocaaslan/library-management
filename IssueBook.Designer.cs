@@ -43,6 +43,8 @@
             lb4 = new Label();
             lb5 = new Label();
             bt3 = new Button();
+            ID = new ColumnHeader();
+            Name = new ColumnHeader();
             pn1.SuspendLayout();
             SuspendLayout();
             // 
@@ -98,7 +100,7 @@
             tb2.Name = "tb2";
             tb2.Size = new Size(292, 23);
             tb2.TabIndex = 23;
-            tb2.KeyUp += TextBox1_KeyUp;
+            tb2.KeyUp += Tb2KeyUp;
             // 
             // lb3
             // 
@@ -173,6 +175,7 @@
             // lv2
             // 
             lv2.BackColor = SystemColors.Control;
+            lv2.Columns.AddRange(new ColumnHeader[] { ID, Name });
             lv2.Location = new Point(12, 208);
             lv2.Name = "lv2";
             lv2.Size = new Size(240, 105);
@@ -231,7 +234,6 @@
             Controls.Add(tb1);
             Controls.Add(lb1);
             Controls.Add(pn1);
-            Name = "IssueBook";
             Text = "Issue Book";
             pn1.ResumeLayout(false);
             pn1.PerformLayout();
@@ -256,5 +258,7 @@
         private Label lb5;
         private Button bt2;
         private Button bt3;
+        private ColumnHeader ID;
+        private ColumnHeader Name;
     }
 }
