@@ -8,7 +8,7 @@ namespace WinFormsApp2
         public Login()
         {
             InitializeComponent();
-            Model.InitializeConnection("Data Source=DESKTOP-SR937O1;Initial Catalog=libmanag;Integrated Security=True");
+            DatabaseHelper.InitializeConnection("Data Source=DESKTOP-SR937O1;Initial Catalog=libmanag;Integrated Security=True");
         }
 
         private async void Bt1_Click(object sender, EventArgs e)
@@ -19,7 +19,7 @@ namespace WinFormsApp2
                 new SqlParameter("@username", tb1.Text),
                 new SqlParameter("Password", tb2.Text)
             };
-            DataTable dataTable = await Task.Run(() => Model.ExecuteQuery(query, parameters));
+            DataTable dataTable = await Task.Run(() => DatabaseHelper.ExecuteQuery(query, parameters));
 
             if (dataTable.Rows.Count > 0)
             {
