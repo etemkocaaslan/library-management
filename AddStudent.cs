@@ -13,7 +13,7 @@ namespace WinFormsApp2
 
         private void Bt2_Click(object sender, EventArgs e)
         {
-            pb1.Image = Model.GetImage();
+            pb1.Image = FileManager.GetImage();
         }
 
         private void Bt3_Click(object sender, EventArgs e)
@@ -40,7 +40,7 @@ namespace WinFormsApp2
                     new SqlParameter("@image", memoryStream.ToArray())
                 };
 
-                Model.ExecuteNonQuery(sql, parameters);
+                DatabaseHelper.ExecuteNonQuery(sql, parameters);
                 MessageBox.Show("Student is added successfully");
 
                 tb1.Clear();

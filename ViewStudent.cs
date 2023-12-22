@@ -8,7 +8,7 @@ namespace WinFormsApp2
         public ViewStudent()
         {
             InitializeComponent();
-            Model.InitializeConnection("Data Source=DESKTOP-SR937O1;Initial Catalog=libmanag;Integrated Security=True");
+            DatabaseHelper.InitializeConnection("Data Source=DESKTOP-SR937O1;Initial Catalog=libmanag;Integrated Security=True");
         }
 
         private void Bt1_Click(object sender, EventArgs e)
@@ -21,7 +21,7 @@ namespace WinFormsApp2
                     new SqlParameter("@name", "%" + tb1.Text + "%")
                 };
 
-                dgw1.DataSource = Model.ExecuteQuery(query, parameters);
+                dgw1.DataSource = DatabaseHelper.ExecuteQuery(query, parameters);
             }
             catch (Exception ex)
             {
@@ -39,7 +39,7 @@ namespace WinFormsApp2
                 {
                     new SqlParameter("@id", "%" + tb2.Text + "%")
                 };
-                dgw1.DataSource = Model.ExecuteQuery(query, parameters);
+                dgw1.DataSource = DatabaseHelper.ExecuteQuery(query, parameters);
             }
             catch (Exception ex)
             {
@@ -63,7 +63,7 @@ namespace WinFormsApp2
 
             try
             {
-                PopulateFields(Model.ExecuteQuery(query, parameters));
+                PopulateFields(DatabaseHelper.ExecuteQuery(query, parameters));
             }
 
             catch (Exception ex)
@@ -102,7 +102,7 @@ namespace WinFormsApp2
                     new SqlParameter("id", dgw1.SelectedCells[0].Value)
                 };
 
-                Model.ExecuteNonQuery(query, parameters);
+                DatabaseHelper.ExecuteNonQuery(query, parameters);
             }
             catch (Exception ex)
             {

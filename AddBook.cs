@@ -25,7 +25,7 @@ namespace WinFormsApp2
                     new SqlParameter("@quantity", tb6.Text),
                 };
 
-                Model.ExecuteNonQuery(commandTxt, parameters);
+                DatabaseHelper.ExecuteNonQuery(commandTxt, parameters);
                 MessageBox.Show("Books are added successfully");
 
                 tb1.Clear();
