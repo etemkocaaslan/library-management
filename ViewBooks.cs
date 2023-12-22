@@ -18,7 +18,7 @@ namespace WinFormsApp2
                 string query = "SELECT * FROM books_info WHERE name LIKE @name";
                 SqlParameter[] parameters = new[]
                 {
-                    new SqlParameter("@name", tb1.Text)
+                    new SqlParameter("@name", "%" + tb1.Text + "%")
                 };
 
                 dgw1.DataSource = Model.ExecuteQuery(query, parameters);
@@ -36,7 +36,7 @@ namespace WinFormsApp2
                 string query = "SELECT * FROM books_info WHERE author LIKE @author";
                 SqlParameter[] parameters = new[]
                 {
-                    new SqlParameter("@author", tb2.Text) 
+                    new SqlParameter("@author", "%" + tb2.Text + "%") 
                 };
                 dgw1.DataSource = Model.ExecuteQuery(query, parameters);
             }
@@ -87,9 +87,9 @@ namespace WinFormsApp2
         {
             try
             {
-                string updateQuery = "UPDATE books_info SET name = @name, author = @author, publisher = @publisher, purchase_date = @purchaseDate, price = @price, quantity = @quantity WHERE id = @id";
+                string query = "UPDATE books_info SET name = @name, author = @author, publisher = @publisher, purchase_date = @purchaseDate, price = @price, quantity = @quantity WHERE id = @id";
 
-                SqlParameter[] updateParameters = new[]
+                SqlParameter[] parameters = new[]
                 {
                     new SqlParameter("@name", tb3.Text),
                     new SqlParameter("@author", tb4.Text),
@@ -100,7 +100,7 @@ namespace WinFormsApp2
                     new SqlParameter("@id", dgw1.SelectedCells[0].Value)
                 };
 
-                Model.ExecuteNonQuery(updateQuery, updateParameters);
+                Model.ExecuteNonQuery(query, parameters);
             }
             catch (Exception ex)
             {
