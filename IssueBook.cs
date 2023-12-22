@@ -38,24 +38,26 @@ namespace WinFormsApp2
             }
         }
 
-        private async void Tb2KeyUp(object sender, KeyEventArgs e)
-        {
+        private void Tb2KeyUp(object sender, KeyEventArgs e)
+        {     
             lbx1.Visible = true;
-            DataTable issuedbooksDT = new();
+
             try
             {
-                lbx1.DisplayMember = "DisplayColumn";
-                lbx1.ValueMember = "id";
+                DataTable issuedbooksDT = new();
 
                 string query = "SELECT * FROM books_info WHERE name LIKE @name";
                 SqlParameter[] parameters = new[]
                 {
-                    new SqlParameter("@name", tb2.Text)
+                    new SqlParameter("@name", "%" + tb2.Text + "%")
                 };
+                issuedbooksDT = Model.ExecuteQuery(query, parameters);
 
-                issuedbooksDT = await Task.Run(() => Model.ExecuteQuery(query, parameters));
-                issuedbooksDT.Columns.Add("DisplayColumn", typeof(string), "id + '-' + name");
-                lbx1.DataSource = issuedbooksDT;
+                lbx1.Items.Clear();
+                foreach (DataRow row in issuedbooksDT.Rows)
+                {
+                    lbx1.Items.Add(row[columnName: "name"]);
+                }
             }
             catch (Exception ex)
             {
