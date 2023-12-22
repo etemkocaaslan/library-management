@@ -11,7 +11,7 @@ namespace WinFormsApp2
         public IssueBook()
         {
             InitializeComponent();
-            Model.InitializeConnection("Data Source=DESKTOP-SR937O1;Initial Catalog=libmanag;Integrated Security=True");
+            DatabaseHelper.InitializeConnection("Data Source=DESKTOP-SR937O1;Initial Catalog=libmanag;Integrated Security=True");
         }
 
         private void BarrowedCheck()
@@ -25,7 +25,7 @@ namespace WinFormsApp2
                     new SqlParameter("@student_enrollment_no", tb1.Text)
                 };
 
-                issuedbooksDT = Model.ExecuteQuery(query, parameters);
+                issuedbooksDT = DatabaseHelper.ExecuteQuery(query, parameters);
             }
             catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace WinFormsApp2
                 {
                     new SqlParameter("@name", "%" + tb2.Text + "%")
                 };
-                issuedbooksDT = Model.ExecuteQuery(query, parameters);
+                issuedbooksDT = DatabaseHelper.ExecuteQuery(query, parameters);
 
                 lbx1.Items.Clear();
                 foreach (DataRow row in issuedbooksDT.Rows)
@@ -79,7 +79,7 @@ namespace WinFormsApp2
                         new SqlParameter("@enrollment_no", tb2.Text)
                     };
 
-                    paramatersList = await Task.Run(() => Model.ExecuteQuery(query, parameters));
+                    paramatersList = await Task.Run(() => DatabaseHelper.ExecuteQuery(query, parameters));
                     pn1.Visible = true;
 
                     lv1.Clear();
@@ -140,7 +140,7 @@ namespace WinFormsApp2
 
                 foreach (SqlParameter[] parameters in paramatersList)
                 {
-                    Model.ExecuteNonQuery(commandTxt, parameters);
+                    DatabaseHelper.ExecuteNonQuery(commandTxt, parameters);
                 }
             }
             catch (Exception ex)
