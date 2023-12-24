@@ -15,7 +15,7 @@ namespace WinFormsApp2
             try
             {
                 string commandTxt = "Insert into books_info(name, author, publisher, purchase_date, price, quantity) Values(@name, @author, @publisher, @purchase_date, @price, @quantity)";
-                var parameters = new[]
+                SqlParameter[] parameters = new[]
                 {
                     new SqlParameter("@name", tb1.Text),
                     new SqlParameter("@author", tb2.Text),
@@ -25,7 +25,7 @@ namespace WinFormsApp2
                     new SqlParameter("@quantity", tb6.Text),
                 };
 
-                Model.ExecuteNonQuery(commandTxt, parameters);
+                DatabaseHelper.ExecuteNonQuery(commandTxt, parameters);
                 MessageBox.Show("Books are added successfully");
 
                 tb1.Clear();

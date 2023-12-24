@@ -115,9 +115,9 @@
             lb2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
             lb2.Location = new Point(31, 166);
             lb2.Name = "lb2";
-            lb2.Size = new Size(41, 30);
+            lb2.Size = new Size(34, 30);
             lb2.TabIndex = 14;
-            lb2.Text = "No";
+            lb2.Text = "ID";
             // 
             // tb1
             // 
@@ -150,7 +150,6 @@
             dgw1.Size = new Size(666, 393);
             dgw1.TabIndex = 3;
             dgw1.CellClick += Dgw1_CellClick;
-            dgw1.CellContentClick += Dgw1_CellContentClick;
             // 
             // lb3
             // 

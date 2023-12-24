@@ -1,10 +1,10 @@
 ﻿namespace WinFormsApp2
 {
-    public partial class mdi_user : Form
+    public partial class MDIuser : Form
     {
         private int childFormNumber = 0;
 
-        public mdi_user()
+        public MDIuser()
         {
             InitializeComponent();
         }
@@ -28,7 +28,7 @@
             };
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
-                string FileName = openFileDialog.FileName;
+                string fileName = openFileDialog.FileName;
             }
         }
 
@@ -41,7 +41,7 @@
             };
             if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
             {
-                string FileName = saveFileDialog.FileName;
+                string fileName = saveFileDialog.FileName;
             }
         }
 

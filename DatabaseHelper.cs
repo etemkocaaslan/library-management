@@ -1,18 +1,12 @@
-﻿using System.Data;
+﻿using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace WinFormsApp2
 {
-    internal static class Model
+    internal static class DatabaseHelper
     {
         private static SqlConnection? connection;
-        private static readonly string image_path = @"C:\Users\kasla\MyProjects\library_management\WinFormsApp2\images\";
-        private static readonly OpenFileDialog openImageFileDialog = new()
-        {
-            Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp",
-            InitialDirectory = image_path,
-            FileName = ""
-        };
 
         public static void InitializeConnection(string connectionString)
         {
@@ -23,14 +17,14 @@ namespace WinFormsApp2
         {
             EnsureConnection();
 
-            using var command = new SqlCommand(query, connection);
+            using SqlCommand command = new SqlCommand(query, connection);
             foreach (SqlParameter parameter in parameters)
             {
                 command.Parameters.Add(parameter);
             }
 
-            using var adapter = new SqlDataAdapter(command);
-            var dataTable = new DataTable();
+            using SqlDataAdapter adapter = new(command);
+            DataTable dataTable = new();
             adapter.Fill(dataTable);
             return dataTable;
         }
@@ -57,10 +51,23 @@ namespace WinFormsApp2
             if (connection.State != ConnectionState.Open)
                 connection.Open();
         }
+        public static SqlConnection? Connection => connection;
+    }
+
+    internal static class FileManager
+    {
+        private static readonly string? image_path = ConfigurationManager.AppSettings["ImagePath"];
+        private static readonly OpenFileDialog openImageFileDialog = new()
+        {
+            Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp",
+            InitialDirectory = image_path,
+            FileName = ""
+        };
+
         public static Bitmap? GetImage()
         {
             return (openImageFileDialog.ShowDialog() == DialogResult.OK) ? new Bitmap(openImageFileDialog.FileName) : null;
         }
-        public static SqlConnection? Connection => connection;
     }
+
 }

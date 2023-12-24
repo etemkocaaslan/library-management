@@ -1,6 +1,6 @@
 ﻿namespace WinFormsApp2
 {
-    partial class mdi_user
+    partial class MDIuser
     {
         /// <summary>
         /// Required designer variable.

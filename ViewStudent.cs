@@ -8,14 +8,20 @@ namespace WinFormsApp2
         public ViewStudent()
         {
             InitializeComponent();
-            Model.InitializeConnection("Data Source=DESKTOP-SR937O1;Initial Catalog=libmanag;Integrated Security=True");
+            DatabaseHelper.InitializeConnection("Data Source=DESKTOP-SR937O1;Initial Catalog=libmanag;Integrated Security=True");
         }
 
         private void Bt1_Click(object sender, EventArgs e)
         {
             try
             {
-                dgw1.DataSource = Model.ExecuteQuery("SELECT * FROM  Student WHERE name like('%" + tb1.Text + "%')");
+                string query = "SELECT * FROM Student WHERE name LIKE @name";
+                SqlParameter[] parameters = new[]
+                {
+                    new SqlParameter("@name", "%" + tb1.Text + "%")
+                };
+
+                dgw1.DataSource = DatabaseHelper.ExecuteQuery(query, parameters);
             }
             catch (Exception ex)
             {
@@ -28,7 +34,12 @@ namespace WinFormsApp2
         {
             try
             {
-                dgw1.DataSource = Model.ExecuteQuery("SELECT * FROM  Student WHERE name like('%" + tb2.Text + "%')");
+                string query = "SELECT * FROM student WHERE id LIKE @id";
+                SqlParameter[] parameters = new[]
+                {
+                    new SqlParameter("@id", "%" + tb2.Text + "%")
+                };
+                dgw1.DataSource = DatabaseHelper.ExecuteQuery(query, parameters);
             }
             catch (Exception ex)
             {
@@ -38,17 +49,21 @@ namespace WinFormsApp2
         }
         private void Dgw1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                return;
 
             pn2.Visible = true;
 
-            var selectedId = dgw1.Rows[e.RowIndex].Cells[0].Value;
-            string sql = "SELECT * FROM Student WHERE Id = @id";
-            var parameters = new[] { new SqlParameter("@id", selectedId) };
+            object selectedId = dgw1.Rows[e.RowIndex].Cells[0].Value;
+            string query = "SELECT * FROM Student WHERE Id = @id";
+            SqlParameter[] parameters = new[]
+            {
+                new SqlParameter("@id", selectedId)
+            };
 
             try
             {
-                PopulateFields(Model.ExecuteQuery(sql, parameters));
+                PopulateFields(DatabaseHelper.ExecuteQuery(query, parameters));
             }
 
             catch (Exception ex)
@@ -69,34 +84,31 @@ namespace WinFormsApp2
             pb1.Image = Image.FromStream(new MemoryStream((Byte[])table.Rows[0]["image"]));
 
         }
-        // old approach
-        //private void PopulateFields(DataRow row)
-        //{
-        //    tb3.Text = row["name"]?.ToString()?.TrimEnd();
-        //    tb4.Text = row["enrollment_no"]?.ToString()?.TrimEnd();
-        //    tb5.Text = row["department"]?.ToString()?.TrimEnd();
-        //    tb6.Text = row["sem"]?.ToString()?.TrimEnd();
-        //    tb7.Text = row["contact"]?.ToString()?.TrimEnd();
-        //    tb8.Text = row["email"]?.ToString()?.TrimEnd();
-        //}
-
-        private void Dgw1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         private void Bt3_Click(object sender, EventArgs e)
         {
             try
             {
-                Model.ExecuteNonQuery("UPDATE Student SET name='" + tb3.Text + "',enrollment_no='" + tb4.Text + "',department='" + tb5.Text + "',sem='" + tb6.Text + "',contact='" + tb7.Text + "',email='" + tb8.Text + "'where id='" + dgw1.SelectedCells[0].Value + "'");
+                string query = "UPDATE student SET name = @name, enrollment_no = @enrollment_no, department = @department, sem = @sem, contact = @contact, email = @email WHERE id = @id";
+
+                SqlParameter[] parameters = new[]
+                {
+                    new SqlParameter("@name", tb3.Text),
+                    new SqlParameter("@enrollment_no", tb4.Text),
+                    new SqlParameter("@department", tb5.Text),
+                    new SqlParameter("@sem", tb6.Text),
+                    new SqlParameter("@contact", tb7.Text),
+                    new SqlParameter("@email", tb8.Text),
+                    new SqlParameter("id", dgw1.SelectedCells[0].Value)
+                };
+
+                DatabaseHelper.ExecuteNonQuery(query, parameters);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            Bt1_Click(sender, e);
-
+            pn2.Visible = false;
         }
     }
 }

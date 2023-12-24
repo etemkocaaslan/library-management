@@ -11,27 +11,25 @@ namespace WinFormsApp2
             InitializeComponent();
         }
 
-        private void Pb1_Click(object sender, EventArgs e)
-        {
-        }
-
         private void Bt2_Click(object sender, EventArgs e)
         {
-            pb1.Image = Model.GetImage();
+            pb1.Image = FileManager.GetImage();
         }
 
-        private void Bt3_Click(object sender, EventArgs e) => pb1.Image = null;
-
+        private void Bt3_Click(object sender, EventArgs e)
+        {
+            pb1.Image = null;
+        }
 
         private void Bt1_Click(object sender, EventArgs e)
         {
             try
             {
-                var memoryStream = new MemoryStream();
+                MemoryStream memoryStream = new();
                 pb1.Image.Save(memoryStream, ImageFormat.Jpeg);
 
                 string sql = "Insert into Student(name, enrollment_no, department, sem, contact, email, image) Values(@name, @enrollment_no, @department, @sem, @contact, @email, @image)";
-                var parameters = new[]
+                SqlParameter[] parameters = new[]
                 {
                     new SqlParameter("@name", tb1.Text),
                     new SqlParameter("@enrollment_no", tb2.Text),
@@ -42,7 +40,7 @@ namespace WinFormsApp2
                     new SqlParameter("@image", memoryStream.ToArray())
                 };
 
-                Model.ExecuteNonQuery(sql, parameters);
+                DatabaseHelper.ExecuteNonQuery(sql, parameters);
                 MessageBox.Show("Student is added successfully");
 
                 tb1.Clear();

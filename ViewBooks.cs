@@ -8,7 +8,7 @@ namespace WinFormsApp2
         public ViewBooks()
         {
             InitializeComponent();
-            Model.InitializeConnection("Data Source=DESKTOP-SR937O1;Initial Catalog=libmanag;Integrated Security=True");
+            DatabaseHelper.InitializeConnection("Data Source=DESKTOP-SR937O1;Initial Catalog=libmanag;Integrated Security=True");
         }
 
         private void Bt1_Click(object sender, EventArgs e)
@@ -16,8 +16,12 @@ namespace WinFormsApp2
             try
             {
                 string query = "SELECT * FROM books_info WHERE name LIKE @name";
-                var parameters = new[] { new SqlParameter("@name", "%" + tb1.Text + "%") };
-                dgw1.DataSource = Model.ExecuteQuery(query, parameters);
+                SqlParameter[] parameters = new[]
+                {
+                    new SqlParameter("@name", "%" + tb1.Text + "%")
+                };
+
+                dgw1.DataSource = DatabaseHelper.ExecuteQuery(query, parameters);
             }
             catch (Exception ex)
             {
@@ -30,8 +34,11 @@ namespace WinFormsApp2
             try
             {
                 string query = "SELECT * FROM books_info WHERE author LIKE @author";
-                var parameters = new[] { new SqlParameter("@author", tb2.Text) };
-                dgw1.DataSource = Model.ExecuteQuery(query, parameters);
+                SqlParameter[] parameters = new[]
+                {
+                    new SqlParameter("@author", "%" + tb2.Text + "%") 
+                };
+                dgw1.DataSource = DatabaseHelper.ExecuteQuery(query, parameters);
             }
             catch (Exception ex)
             {
@@ -41,17 +48,18 @@ namespace WinFormsApp2
 
         private void Dgw1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) 
+                return;
 
             pn2.Visible = true;
 
-            var selectedId = dgw1.Rows[e.RowIndex].Cells[0].Value;
+            object selectedId = dgw1.Rows[e.RowIndex].Cells[0].Value;
             string sql = "SELECT * FROM books_info WHERE Id = @id";
-            var parameters = new[] { new SqlParameter("@id", selectedId) };
+            SqlParameter[] parameters = new[] { new SqlParameter("@id", selectedId) };
 
             try
             {
-                DataTable table = Model.ExecuteQuery(sql, parameters);
+                DataTable table = DatabaseHelper.ExecuteQuery(sql, parameters);
                 if (table.Rows.Count > 0)
                 {
                     DataRow row = table.Rows[0];
@@ -79,9 +87,9 @@ namespace WinFormsApp2
         {
             try
             {
-                string updateQuery = "UPDATE books_info SET name = @name, author = @author, publisher = @publisher, purchase_date = @purchaseDate, price = @price, quantity = @quantity WHERE id = @id";
+                string query = "UPDATE books_info SET name = @name, author = @author, publisher = @publisher, purchase_date = @purchaseDate, price = @price, quantity = @quantity WHERE id = @id";
 
-                var updateParameters = new[]
+                SqlParameter[] parameters = new[]
                 {
                     new SqlParameter("@name", tb3.Text),
                     new SqlParameter("@author", tb4.Text),
@@ -92,7 +100,7 @@ namespace WinFormsApp2
                     new SqlParameter("@id", dgw1.SelectedCells[0].Value)
                 };
 
-                Model.ExecuteNonQuery(updateQuery, updateParameters);
+                DatabaseHelper.ExecuteNonQuery(query, parameters);
             }
             catch (Exception ex)
             {

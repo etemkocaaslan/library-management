@@ -200,7 +200,6 @@
             pb1.Size = new Size(178, 170);
             pb1.TabIndex = 34;
             pb1.TabStop = false;
-            pb1.Click += Pb1_Click;
             // 
             // bt2
             // 
