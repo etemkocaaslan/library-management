@@ -17,14 +17,14 @@ namespace WinFormsApp2
         {
             EnsureConnection();
 
-            using var command = new SqlCommand(query, connection);
+            using SqlCommand command = new SqlCommand(query, connection);
             foreach (SqlParameter parameter in parameters)
             {
                 command.Parameters.Add(parameter);
             }
 
-            using var adapter = new SqlDataAdapter(command);
-            var dataTable = new DataTable();
+            using SqlDataAdapter adapter = new(command);
+            DataTable dataTable = new();
             adapter.Fill(dataTable);
             return dataTable;
         }
