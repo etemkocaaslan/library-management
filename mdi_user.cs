@@ -28,7 +28,7 @@
             };
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
-                string FileName = openFileDialog.FileName;
+                string fileName = openFileDialog.FileName;
             }
         }
 
@@ -41,7 +41,7 @@
             };
             if (saveFileDialog.ShowDialog(this) == DialogResult.OK)
             {
-                string FileName = saveFileDialog.FileName;
+                string fileName = saveFileDialog.FileName;
             }
         }
 
