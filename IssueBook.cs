@@ -38,8 +38,37 @@ namespace WinFormsApp2
             }
         }
 
+        private void UpdateChart()
+        {
+            DataTable issuedbooksDT = new();
+            try
+            {
+                string query = "SELECT id FROM books_info WHERE name = @name";
+                SqlParameter[] parameters = new[]
+                {
+                    new SqlParameter("@name", tb2.Text)
+                };
+
+                issuedbooksDT = DatabaseHelper.ExecuteQuery(query, parameters);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+                 
+            if(issuedbooksDT.Rows.Count > 0) {
+                DataRow row = issuedbooksDT.Rows[0];
+                lv2.Items.Add(row["id"].ToString() + "-" + tb2.Text);
+            }
+            else
+            {
+                MessageBox.Show("Invalid entry!");
+            }
+            
+        }
+
         private void Tb2KeyUp(object sender, KeyEventArgs e)
-        {     
+        {
             lbx1.Visible = true;
 
             try
@@ -108,21 +137,7 @@ namespace WinFormsApp2
         }
         private void Bt2_Click(object sender, EventArgs e)
         {
-            lv2.Columns.Add("Book ID", -2, HorizontalAlignment.Left);
-            lv2.Columns.Add("Book Name", -2, HorizontalAlignment.Left);
-
-            string[] txtParts = tb2.Text.Split('-');
-            if (txtParts.Length == 2)
-            {
-
-                ListViewItem item = new(txtParts[1].Trim());
-                item.SubItems.Add(txtParts[0].Trim());
-                lv2.Items.Add(item);
-            }
-            else
-            {
-                MessageBox.Show("Not a valid entry");
-            }
+            UpdateChart();
             tb2.Clear();
         }
 
