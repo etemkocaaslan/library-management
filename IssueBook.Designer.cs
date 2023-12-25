@@ -76,7 +76,7 @@
             bt2.TabIndex = 24;
             bt2.Text = "Add";
             bt2.UseVisualStyleBackColor = false;
-            bt2.Click += Bt2_Click;
+            bt2.Click += AddToChartButtonClick;
             // 
             // lbx1
             // 
@@ -88,7 +88,7 @@
             lbx1.Size = new Size(292, 124);
             lbx1.TabIndex = 24;
             lbx1.Visible = false;
-            lbx1.DoubleClick += Lbx1_DoubleClick;
+            lbx1.DoubleClick += ListViewBoxDoubleClick;
             // 
             // tb2
             // 
@@ -99,7 +99,7 @@
             tb2.Name = "tb2";
             tb2.Size = new Size(292, 23);
             tb2.TabIndex = 23;
-            tb2.KeyUp += Tb2KeyUp;
+            tb2.KeyUp += SearchKeyUp;
             // 
             // lb3
             // 
@@ -141,7 +141,7 @@
             bt1.TabIndex = 19;
             bt1.Text = "SEARCH";
             bt1.UseVisualStyleBackColor = false;
-            bt1.Click += Bt1_Click;
+            bt1.Click += CheckStudent;
             // 
             // tb1
             // 
@@ -215,10 +215,10 @@
             bt3.Name = "bt3";
             bt3.Size = new Size(86, 49);
             bt3.TabIndex = 25;
-            bt3.Text = "Add";
+            bt3.Text = "Issue";
             bt3.UseVisualStyleBackColor = false;
             bt3.Visible = false;
-            bt3.Click += Bt3_Click;
+            bt3.Click += IssueButtonClick;
             // 
             // IssueBook
             // 
