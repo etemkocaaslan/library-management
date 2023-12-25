@@ -234,6 +234,7 @@
             Controls.Add(tb1);
             Controls.Add(lb1);
             Controls.Add(pn1);
+            Name = "IssueBook";
             Text = "Issue Book";
             pn1.ResumeLayout(false);
             pn1.PerformLayout();
