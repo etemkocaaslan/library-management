@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
 using System.Web;
 
@@ -37,65 +38,7 @@ namespace WinFormsApp2
                 lv1.Items.Add(row["book_id"] + "-" + row["book_name"].ToString());
             }
         }
-
-        private void UpdateChart()
-        {
-            DataTable issuedbooksDT = new();
-            try
-            {
-                string query = "SELECT id FROM books_info WHERE name = @name";
-                SqlParameter[] parameters = new[]
-                {
-                    new SqlParameter("@name", tb2.Text)
-                };
-
-                issuedbooksDT = DatabaseHelper.ExecuteQuery(query, parameters);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-                 
-            if(issuedbooksDT.Rows.Count > 0) {
-                DataRow row = issuedbooksDT.Rows[0];
-                lv2.Items.Add(row["id"].ToString() + "-" + tb2.Text);
-            }
-            else
-            {
-                MessageBox.Show("Invalid entry!");
-            }
-            
-        }
-
-        private void Tb2KeyUp(object sender, KeyEventArgs e)
-        {
-            lbx1.Visible = true;
-
-            try
-            {
-                DataTable issuedbooksDT = new();
-
-                string query = "SELECT * FROM books_info WHERE name LIKE @name";
-                SqlParameter[] parameters = new[]
-                {
-                    new SqlParameter("@name", "%" + tb2.Text + "%")
-                };
-                issuedbooksDT = DatabaseHelper.ExecuteQuery(query, parameters);
-
-                lbx1.Items.Clear();
-                foreach (DataRow row in issuedbooksDT.Rows)
-                {
-                    lbx1.Items.Add(row[columnName: "name"]);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-
-        private async void Bt1_Click(object sender, EventArgs e)
+        private async void CheckStudent(object sender, EventArgs e)
         {
             if (tb1.TextLength > 0)
             {
@@ -135,28 +78,78 @@ namespace WinFormsApp2
             }
 
         }
-        private void Bt2_Click(object sender, EventArgs e)
+
+        private void UpdateChart()
+        {
+            DataTable issuedbooksDT = new();
+            try
+            {
+                string commandTxt = "SELECT id FROM books_info WHERE name = @name";
+                SqlParameter[] parameters = new[]
+                {
+                    new SqlParameter("@name", tb2.Text)
+                };
+
+                issuedbooksDT = DatabaseHelper.ExecuteQuery(commandTxt, parameters);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            if (issuedbooksDT.Rows.Count > 0)
+            {
+                DataRow row = issuedbooksDT.Rows[0];
+                lv2.Items.Add(row["id"].ToString() + "-" + tb2.Text);
+            }
+            else
+            {
+                MessageBox.Show("Invalid entry!");
+            }
+
+        }
+        private void AddToChartButtonClick(object sender, EventArgs e)
         {
             UpdateChart();
             tb2.Clear();
         }
 
-        private void Bt3_Click(object sender, EventArgs e)
+        private SqlParameter[] GetParametersFromListView(ListViewItem listViewItem)
+        {
+            return new SqlParameter[]
+            {
+                new SqlParameter("@student_enrollment_no", tb1.Text.TrimEnd()),
+                new SqlParameter("@book_id", listViewItem.Text.Split('-')[0].Trim()),
+                new SqlParameter("@book_name", listViewItem.Text.Split('-')[1].Trim()),
+                new SqlParameter("@purchase_date", dtp1.Text)
+            };
+        }
+        private void IssueButtonClick(object sender, EventArgs e)
         {
             try
             {
-                string commandTxt = "Insert into issue_books(student_enrollment_no, book_id, book_name) Values(@student_enrollment_no, @book_id, @book_name)";
                 paramatersList = new List<SqlParameter[]>();
-
                 foreach (ListViewItem item in lv2.Items)
                 {
-                    paramatersList.Add(GetSqlParameter(item));
+                    string bookName = item.Text.Split('-')[1];
+                    if (DatabaseHelper.IsAvailable(bookName))
+                    {
+                        paramatersList.Add(GetParametersFromListView(item));
+                    }
+                    else
+                    {
+                        MessageBox.Show($"{bookName} is not available!");
+                    }
                 }
 
+                string commandTxt = "Insert into issue_books(student_enrollment_no, book_id, book_name, purchase_date) Values(@student_enrollment_no, @book_id, @book_name, @purchase_date)";
                 foreach (SqlParameter[] parameters in paramatersList)
                 {
                     DatabaseHelper.ExecuteNonQuery(commandTxt, parameters);
+                    var id = parameters[1].Value;
+                    UpdateAvailable(id);
                 }
+                
             }
             catch (Exception ex)
             {
@@ -167,17 +160,50 @@ namespace WinFormsApp2
             lv2.Clear();
             lb1.Refresh();
         }
-        private SqlParameter[] GetSqlParameter(ListViewItem listViewItem)
+        private void UpdateAvailable(object id)
         {
-            return new SqlParameter[]
+            try
             {
-                new SqlParameter("@student_enrollment_no", tb1.Text.TrimEnd()),
-                new SqlParameter("@book_id", listViewItem.SubItems[1].Text.TrimEnd()),
-                new SqlParameter("@book_name", listViewItem.Text.TrimEnd())
-            };
+                string commandTxt = "UPDATE books_info SET available = available - 1 WHERE ID = id";
+                DatabaseHelper.ExecuteNonQuery(commandTxt, new SqlParameter("id", id));
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        private void Lbx1_DoubleClick(object sender, EventArgs e)
+        private void SearchKeyUp(object sender, KeyEventArgs e)
+        {
+            lbx1.Visible = true;
+
+            try
+            {
+                DataTable issuedbooksDT = new();
+
+                string query = "SELECT * FROM books_info WHERE name LIKE @name";
+                SqlParameter[] parameters = new[]
+                {
+                    new SqlParameter("@name", "%" + tb2.Text + "%")
+                };
+                issuedbooksDT = DatabaseHelper.ExecuteQuery(query, parameters);
+
+                lbx1.Items.Clear();
+                foreach (DataRow row in issuedbooksDT.Rows)
+                {
+                    lbx1.Items.Add(row[columnName: "name"]);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+
+        private void ListViewBoxDoubleClick(object sender, EventArgs e)
         {
             lbx1.Visible = false;
             tb2.Text = lbx1.Text.TrimEnd();
