@@ -1,7 +1,5 @@
-﻿using System.ComponentModel;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Web;
 
 namespace WinFormsApp2
 {
@@ -121,7 +119,7 @@ namespace WinFormsApp2
                 new SqlParameter("@student_enrollment_no", tb1.Text.TrimEnd()),
                 new SqlParameter("@book_id", listViewItem.Text.Split('-')[0].Trim()),
                 new SqlParameter("@book_name", listViewItem.Text.Split('-')[1].Trim()),
-                new SqlParameter("@purchase_date", dtp1.Text)
+                new SqlParameter("@issue_date", dtp1.Text)
             };
         }
         private void IssueButtonClick(object sender, EventArgs e)
@@ -132,7 +130,7 @@ namespace WinFormsApp2
                 foreach (ListViewItem item in lv2.Items)
                 {
                     string bookName = item.Text.Split('-')[1];
-                    if (DatabaseHelper.IsAvailable(bookName))
+                    if (IsAvailable(bookName))
                     {
                         paramatersList.Add(GetParametersFromListView(item));
                     }
@@ -142,14 +140,14 @@ namespace WinFormsApp2
                     }
                 }
 
-                string commandTxt = "Insert into issue_books(student_enrollment_no, book_id, book_name, purchase_date) Values(@student_enrollment_no, @book_id, @book_name, @purchase_date)";
+                string commandTxt = "Insert into issue_books(student_enrollment_no, book_id, book_name, issue_date) Values(@student_enrollment_no, @book_id, @book_name, @issue_date)";
                 foreach (SqlParameter[] parameters in paramatersList)
                 {
                     DatabaseHelper.ExecuteNonQuery(commandTxt, parameters);
                     var id = parameters[1].Value;
                     UpdateAvailable(id);
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -164,8 +162,8 @@ namespace WinFormsApp2
         {
             try
             {
-                string commandTxt = "UPDATE books_info SET available = available - 1 WHERE ID = id";
-                DatabaseHelper.ExecuteNonQuery(commandTxt, new SqlParameter("id", id));
+                string commandTxt = "UPDATE books_info SET available = available - 1 WHERE ID = @id";
+                DatabaseHelper.ExecuteNonQuery(commandTxt, new SqlParameter("@id", id));
 
             }
             catch (Exception ex)
@@ -174,6 +172,21 @@ namespace WinFormsApp2
             }
         }
 
+        public static bool IsAvailable(string bookName)
+        {
+            DataTable issuedbooksDT = new();
+            try
+            {
+                string commandTxt = "SELECT available FROM books_info WHERE name = @name";
+                issuedbooksDT = DatabaseHelper.ExecuteQuery(commandTxt, new SqlParameter("@name", bookName));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return Convert.ToInt32(issuedbooksDT.Rows[0]["available"]) > 0;
+        }
         private void SearchKeyUp(object sender, KeyEventArgs e)
         {
             lbx1.Visible = true;

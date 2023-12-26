@@ -43,21 +43,6 @@ namespace WinFormsApp2
             return command.ExecuteNonQuery();
         }
 
-        public static bool IsAvailable(string bookName)
-        {
-            DataTable issuedbooksDT = new();
-            try
-            {
-                string commandTxt = "SELECT available FROM books_info WHERE name = @name";
-                issuedbooksDT = ExecuteQuery(commandTxt, new SqlParameter("@name", bookName));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            return Convert.ToInt32(issuedbooksDT.Rows[0]["available"]) > 0;
-        }
 
         private static void EnsureConnection()
         {
