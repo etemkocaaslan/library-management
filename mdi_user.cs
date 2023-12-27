@@ -127,5 +127,16 @@
             IssueBook issueBook = new IssueBook();
             issueBook.Show();
         }
+
+        private void stockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ViewStockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BookStock bookStock = new BookStock();
+            bookStock.Show();
+        }
     }
 }
