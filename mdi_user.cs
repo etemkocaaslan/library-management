@@ -135,7 +135,7 @@
 
         private void ViewStockToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BookStock bookStock = new BookStock();
+            BookStockForm bookStock = new BookStockForm();
             bookStock.Show();
         }
 
