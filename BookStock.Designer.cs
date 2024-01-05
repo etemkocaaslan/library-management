@@ -1,6 +1,6 @@
 ﻿namespace LibraryManagement
 {
-    partial class BookStock
+    partial class BookStockForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,41 +28,41 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Dgw1 = new DataGridView();
-            Dgw2 = new DataGridView();
+            booksGridView = new DataGridView();
+            issuesGridView = new DataGridView();
             bt1 = new Button();
-            tb1 = new TextBox();
+            bookNameTextBox = new TextBox();
             lb1 = new Label();
             pn1 = new Panel();
             bt2 = new Button();
             tb3 = new TextBox();
-            tb2 = new TextBox();
+            issueDetailsTextBox = new TextBox();
             lb3 = new Label();
             lb2 = new Label();
-            ((System.ComponentModel.ISupportInitialize)Dgw1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)Dgw2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)booksGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)issuesGridView).BeginInit();
             pn1.SuspendLayout();
             SuspendLayout();
             // 
             // Dgw1
             // 
-            Dgw1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            Dgw1.Location = new Point(238, 11);
-            Dgw1.Name = "Dgw1";
-            Dgw1.RowTemplate.Height = 25;
-            Dgw1.Size = new Size(592, 184);
-            Dgw1.TabIndex = 0;
-            Dgw1.CellClick += Dgw1_CellClick;
+            booksGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            booksGridView.Location = new Point(238, 11);
+            booksGridView.Name = "Dgw1";
+            booksGridView.RowTemplate.Height = 25;
+            booksGridView.Size = new Size(592, 184);
+            booksGridView.TabIndex = 0;
+            booksGridView.CellClick += booksGridView_CellClick;
             // 
             // Dgw2
             // 
-            Dgw2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            Dgw2.Location = new Point(238, 205);
-            Dgw2.Name = "Dgw2";
-            Dgw2.RowTemplate.Height = 25;
-            Dgw2.Size = new Size(592, 184);
-            Dgw2.TabIndex = 1;
-            Dgw2.CellClick += Dgw2_CellClick;
+            issuesGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            issuesGridView.Location = new Point(238, 205);
+            issuesGridView.Name = "Dgw2";
+            issuesGridView.RowTemplate.Height = 25;
+            issuesGridView.Size = new Size(592, 184);
+            issuesGridView.TabIndex = 1;
+            issuesGridView.CellClick += issuesGridView_CellClick;
             // 
             // bt1
             // 
@@ -77,15 +77,15 @@
             bt1.TabIndex = 22;
             bt1.Text = "SEARCH";
             bt1.UseVisualStyleBackColor = false;
-            bt1.Click += Bt1_Click;
+            bt1.Click += SearchButton_Click;
             // 
             // tb1
             // 
-            tb1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            tb1.Location = new Point(8, 63);
-            tb1.Name = "tb1";
-            tb1.Size = new Size(214, 29);
-            tb1.TabIndex = 21;
+            bookNameTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            bookNameTextBox.Location = new Point(8, 63);
+            bookNameTextBox.Name = "tb1";
+            bookNameTextBox.Size = new Size(214, 29);
+            bookNameTextBox.TabIndex = 21;
             // 
             // lb1
             // 
@@ -101,7 +101,7 @@
             // 
             pn1.Controls.Add(bt2);
             pn1.Controls.Add(tb3);
-            pn1.Controls.Add(tb2);
+            pn1.Controls.Add(issueDetailsTextBox);
             pn1.Controls.Add(lb3);
             pn1.Controls.Add(lb2);
             pn1.Location = new Point(12, 205);
@@ -134,11 +134,11 @@
             // 
             // tb2
             // 
-            tb2.BackColor = Color.Gainsboro;
-            tb2.Location = new Point(61, 19);
-            tb2.Name = "tb2";
-            tb2.Size = new Size(139, 23);
-            tb2.TabIndex = 2;
+            issueDetailsTextBox.BackColor = Color.Gainsboro;
+            issueDetailsTextBox.Location = new Point(61, 19);
+            issueDetailsTextBox.Name = "tb2";
+            issueDetailsTextBox.Size = new Size(139, 23);
+            issueDetailsTextBox.TabIndex = 2;
             // 
             // lb3
             // 
@@ -165,15 +165,15 @@
             ClientSize = new Size(839, 399);
             Controls.Add(pn1);
             Controls.Add(bt1);
-            Controls.Add(tb1);
+            Controls.Add(bookNameTextBox);
             Controls.Add(lb1);
-            Controls.Add(Dgw2);
-            Controls.Add(Dgw1);
+            Controls.Add(issuesGridView);
+            Controls.Add(booksGridView);
             Name = "BookStock";
             Text = "BookStock";
-            Load += BookStock_Load;
-            ((System.ComponentModel.ISupportInitialize)Dgw1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)Dgw2).EndInit();
+            Load += Form_Load;
+            ((System.ComponentModel.ISupportInitialize)booksGridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)issuesGridView).EndInit();
             pn1.ResumeLayout(false);
             pn1.PerformLayout();
             ResumeLayout(false);
@@ -182,14 +182,14 @@
 
         #endregion
 
-        private DataGridView Dgw1;
-        private DataGridView Dgw2;
+        private DataGridView booksGridView;
+        private DataGridView issuesGridView;
         private Button bt1;
-        private TextBox tb1;
+        private TextBox bookNameTextBox;
         private Label lb1;
         private Panel pn1;
         private TextBox tb3;
-        private TextBox tb2;
+        private TextBox issueDetailsTextBox;
         private Label lb3;
         private Label lb2;
         private Button bt2;
