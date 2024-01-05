@@ -122,7 +122,6 @@
             bt2.TabIndex = 24;
             bt2.Text = "SEND";
             bt2.UseVisualStyleBackColor = false;
-            bt2.Click += Bt2_Click;
             // 
             // tb3
             // 
