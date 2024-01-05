@@ -97,9 +97,8 @@ namespace LibraryManagement
         }
         private void UpdateIssueDetails(int rowIndex)
         {
-            // Assumes the ID is in the 3rd cell of the selected row
             var selectedIssueId = issuesGridView.Rows[rowIndex].Cells[2].Value;
-            issueDetailsTextBox.Text = selectedIssueId.ToString(); // Renamed tb2 to issueDetailsTextBox for clarity
+            issueDetailsTextBox.Text = selectedIssueId.ToString();
         }
     }
 }
