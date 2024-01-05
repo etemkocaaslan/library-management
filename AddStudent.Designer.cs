@@ -1,6 +1,6 @@
-﻿namespace WinFormsApp2
+﻿namespace LibraryManagement
 {
-    partial class AddStudent
+    partial class AddStudentForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tb6 = new TextBox();
-            tb5 = new TextBox();
-            tb3 = new TextBox();
-            tb2 = new TextBox();
-            tb1 = new TextBox();
+            emailTextBox = new TextBox();
+            contactTextBox = new TextBox();
+            departmentTextBox = new TextBox();
+            enrollmentNoTextBox = new TextBox();
+            nameTextBox = new TextBox();
             bt1 = new Button();
             lb6 = new Label();
             lb5 = new Label();
@@ -41,53 +41,53 @@
             lb2 = new Label();
             lb1 = new Label();
             pn1 = new Panel();
-            tb4 = new TextBox();
-            pb1 = new PictureBox();
+            semTextBox = new TextBox();
+            studentPictureBox = new PictureBox();
             bt2 = new Button();
             bt3 = new Button();
             pn1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pb1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)studentPictureBox).BeginInit();
             SuspendLayout();
             // 
             // tb6
             // 
-            tb6.BackColor = SystemColors.Window;
-            tb6.Location = new Point(309, 220);
-            tb6.Name = "tb6";
-            tb6.Size = new Size(136, 23);
-            tb6.TabIndex = 31;
+            emailTextBox.BackColor = SystemColors.Window;
+            emailTextBox.Location = new Point(309, 220);
+            emailTextBox.Name = "tb6";
+            emailTextBox.Size = new Size(136, 23);
+            emailTextBox.TabIndex = 31;
             // 
             // tb5
             // 
-            tb5.BackColor = SystemColors.Window;
-            tb5.Location = new Point(58, 220);
-            tb5.Name = "tb5";
-            tb5.Size = new Size(133, 23);
-            tb5.TabIndex = 30;
+            contactTextBox.BackColor = SystemColors.Window;
+            contactTextBox.Location = new Point(58, 220);
+            contactTextBox.Name = "tb5";
+            contactTextBox.Size = new Size(133, 23);
+            contactTextBox.TabIndex = 30;
             // 
             // tb3
             // 
-            tb3.BackColor = SystemColors.Window;
-            tb3.Location = new Point(58, 146);
-            tb3.Name = "tb3";
-            tb3.Size = new Size(133, 23);
-            tb3.TabIndex = 29;
+            departmentTextBox.BackColor = SystemColors.Window;
+            departmentTextBox.Location = new Point(58, 146);
+            departmentTextBox.Name = "tb3";
+            departmentTextBox.Size = new Size(133, 23);
+            departmentTextBox.TabIndex = 29;
             // 
             // tb2
             // 
-            tb2.BackColor = SystemColors.Window;
-            tb2.Location = new Point(309, 67);
-            tb2.Name = "tb2";
-            tb2.Size = new Size(136, 23);
-            tb2.TabIndex = 28;
+            enrollmentNoTextBox.BackColor = SystemColors.Window;
+            enrollmentNoTextBox.Location = new Point(309, 67);
+            enrollmentNoTextBox.Name = "tb2";
+            enrollmentNoTextBox.Size = new Size(136, 23);
+            enrollmentNoTextBox.TabIndex = 28;
             // 
             // tb1
             // 
-            tb1.BackColor = SystemColors.Window;
-            tb1.Location = new Point(58, 67);
-            tb1.Name = "tb1";
-            tb1.Size = new Size(133, 23);
-            tb1.TabIndex = 27;
+            nameTextBox.BackColor = SystemColors.Window;
+            nameTextBox.Location = new Point(58, 67);
+            nameTextBox.Name = "tb1";
+            nameTextBox.Size = new Size(133, 23);
+            nameTextBox.TabIndex = 27;
             // 
             // bt1
             // 
@@ -102,7 +102,7 @@
             bt1.TabIndex = 26;
             bt1.Text = "SAVE";
             bt1.UseVisualStyleBackColor = false;
-            bt1.Click += Bt1_Click;
+            bt1.Click += AddStudentButton_Click;
             // 
             // lb6
             // 
@@ -166,18 +166,18 @@
             // 
             // pn1
             // 
-            pn1.Controls.Add(tb4);
+            pn1.Controls.Add(semTextBox);
             pn1.Controls.Add(lb1);
             pn1.Controls.Add(lb2);
-            pn1.Controls.Add(tb6);
+            pn1.Controls.Add(emailTextBox);
             pn1.Controls.Add(lb3);
-            pn1.Controls.Add(tb5);
+            pn1.Controls.Add(contactTextBox);
             pn1.Controls.Add(lb4);
-            pn1.Controls.Add(tb3);
+            pn1.Controls.Add(departmentTextBox);
             pn1.Controls.Add(lb5);
-            pn1.Controls.Add(tb2);
+            pn1.Controls.Add(enrollmentNoTextBox);
             pn1.Controls.Add(lb6);
-            pn1.Controls.Add(tb1);
+            pn1.Controls.Add(nameTextBox);
             pn1.Controls.Add(bt1);
             pn1.Location = new Point(12, 217);
             pn1.Name = "pn1";
@@ -186,20 +186,20 @@
             // 
             // tb4
             // 
-            tb4.BackColor = SystemColors.Window;
-            tb4.Location = new Point(309, 146);
-            tb4.Name = "tb4";
-            tb4.ShortcutsEnabled = false;
-            tb4.Size = new Size(136, 23);
-            tb4.TabIndex = 32;
+            semTextBox.BackColor = SystemColors.Window;
+            semTextBox.Location = new Point(309, 146);
+            semTextBox.Name = "tb4";
+            semTextBox.ShortcutsEnabled = false;
+            semTextBox.Size = new Size(136, 23);
+            semTextBox.TabIndex = 32;
             // 
             // pb1
             // 
-            pb1.Location = new Point(180, 12);
-            pb1.Name = "pb1";
-            pb1.Size = new Size(178, 170);
-            pb1.TabIndex = 34;
-            pb1.TabStop = false;
+            studentPictureBox.Location = new Point(180, 12);
+            studentPictureBox.Name = "pb1";
+            studentPictureBox.Size = new Size(178, 170);
+            studentPictureBox.TabIndex = 34;
+            studentPictureBox.TabStop = false;
             // 
             // bt2
             // 
@@ -209,7 +209,7 @@
             bt2.TabIndex = 36;
             bt2.Text = "Upload";
             bt2.UseVisualStyleBackColor = true;
-            bt2.Click += Bt2_Click;
+            bt2.Click += LoadImageButton_Click;
             // 
             // bt3
             // 
@@ -219,7 +219,7 @@
             bt3.TabIndex = 37;
             bt3.Text = "Clear";
             bt3.UseVisualStyleBackColor = true;
-            bt3.Click += Bt3_Click;
+            bt3.Click += ClearImageButton_Click;
             // 
             // AddStudent
             // 
@@ -228,22 +228,22 @@
             ClientSize = new Size(545, 579);
             Controls.Add(bt3);
             Controls.Add(bt2);
-            Controls.Add(pb1);
+            Controls.Add(studentPictureBox);
             Controls.Add(pn1);
             Name = "AddStudent";
             Text = "AddStudent";
             pn1.ResumeLayout(false);
             pn1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pb1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)studentPictureBox).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-        private TextBox tb6;
-        private TextBox tb5;
-        private TextBox tb3;
-        private TextBox tb2;
-        private TextBox tb1;
+        private TextBox emailTextBox;
+        private TextBox contactTextBox;
+        private TextBox departmentTextBox;
+        private TextBox enrollmentNoTextBox;
+        private TextBox nameTextBox;
         private Button bt1;
         private Label lb6;
         private Label lb5;
@@ -252,8 +252,8 @@
         private Label lb2;
         private Label lb1;
         private Panel pn1;
-        private PictureBox pb1;
-        private TextBox tb4;
+        private PictureBox studentPictureBox;
+        private TextBox semTextBox;
         private Button bt2;
         private Button bt3;
     }
