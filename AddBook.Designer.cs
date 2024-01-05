@@ -1,6 +1,6 @@
 ﻿namespace WinFormsApp2
 {
-    partial class AddBook
+    partial class AddBookForm
     {
         /// <summary>
         /// Required designer variable.
@@ -36,12 +36,12 @@
             lb6 = new Label();
             lb5 = new Label();
             bt1 = new Button();
-            tb1 = new TextBox();
-            tb2 = new TextBox();
-            tb3 = new TextBox();
-            tb5 = new TextBox();
-            tb6 = new TextBox();
-            dtp1 = new DateTimePicker();
+            nameTextBox = new TextBox();
+            authorTextBox = new TextBox();
+            publisherTextBox = new TextBox();
+            priceTextBox = new TextBox();
+            quantityTextBox = new TextBox();
+            purchaseDatePicker = new DateTimePicker();
             errorProvider1 = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
@@ -119,54 +119,54 @@
             bt1.TabIndex = 12;
             bt1.Text = "SAVE";
             bt1.UseVisualStyleBackColor = false;
-            bt1.Click += Bt1_Click;
+            bt1.Click += AddBookButton_Click;
             // 
             // tb1
             // 
-            tb1.BackColor = SystemColors.Window;
-            tb1.Location = new Point(33, 62);
-            tb1.Name = "tb1";
-            tb1.Size = new Size(133, 23);
-            tb1.TabIndex = 13;
+            nameTextBox.BackColor = SystemColors.Window;
+            nameTextBox.Location = new Point(33, 62);
+            nameTextBox.Name = "tb1";
+            nameTextBox.Size = new Size(133, 23);
+            nameTextBox.TabIndex = 13;
             // 
             // tb2
             // 
-            tb2.BackColor = SystemColors.Window;
-            tb2.Location = new Point(280, 62);
-            tb2.Name = "tb2";
-            tb2.Size = new Size(136, 23);
-            tb2.TabIndex = 14;
+            authorTextBox.BackColor = SystemColors.Window;
+            authorTextBox.Location = new Point(280, 62);
+            authorTextBox.Name = "tb2";
+            authorTextBox.Size = new Size(136, 23);
+            authorTextBox.TabIndex = 14;
             // 
             // tb3
             // 
-            tb3.BackColor = SystemColors.Window;
-            tb3.Location = new Point(33, 141);
-            tb3.Name = "tb3";
-            tb3.Size = new Size(133, 23);
-            tb3.TabIndex = 15;
+            publisherTextBox.BackColor = SystemColors.Window;
+            publisherTextBox.Location = new Point(33, 141);
+            publisherTextBox.Name = "tb3";
+            publisherTextBox.Size = new Size(133, 23);
+            publisherTextBox.TabIndex = 15;
             // 
             // tb5
             // 
-            tb5.BackColor = SystemColors.Window;
-            tb5.Location = new Point(33, 215);
-            tb5.Name = "tb5";
-            tb5.Size = new Size(133, 23);
-            tb5.TabIndex = 16;
+            priceTextBox.BackColor = SystemColors.Window;
+            priceTextBox.Location = new Point(33, 215);
+            priceTextBox.Name = "tb5";
+            priceTextBox.Size = new Size(133, 23);
+            priceTextBox.TabIndex = 16;
             // 
             // tb6
             // 
-            tb6.BackColor = SystemColors.Window;
-            tb6.Location = new Point(280, 215);
-            tb6.Name = "tb6";
-            tb6.Size = new Size(136, 23);
-            tb6.TabIndex = 18;
+            quantityTextBox.BackColor = SystemColors.Window;
+            quantityTextBox.Location = new Point(280, 215);
+            quantityTextBox.Name = "tb6";
+            quantityTextBox.Size = new Size(136, 23);
+            quantityTextBox.TabIndex = 18;
             // 
             // dtp1
             // 
-            dtp1.Location = new Point(280, 141);
-            dtp1.Name = "dtp1";
-            dtp1.Size = new Size(136, 23);
-            dtp1.TabIndex = 19;
+            purchaseDatePicker.Location = new Point(280, 141);
+            purchaseDatePicker.Name = "dtp1";
+            purchaseDatePicker.Size = new Size(136, 23);
+            purchaseDatePicker.TabIndex = 19;
             // 
             // errorProvider1
             // 
@@ -178,12 +178,12 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(427, 346);
-            Controls.Add(dtp1);
-            Controls.Add(tb6);
-            Controls.Add(tb5);
-            Controls.Add(tb3);
-            Controls.Add(tb2);
-            Controls.Add(tb1);
+            Controls.Add(purchaseDatePicker);
+            Controls.Add(quantityTextBox);
+            Controls.Add(priceTextBox);
+            Controls.Add(publisherTextBox);
+            Controls.Add(authorTextBox);
+            Controls.Add(nameTextBox);
             Controls.Add(bt1);
             Controls.Add(lb6);
             Controls.Add(lb5);
@@ -206,12 +206,12 @@
         private Label lb6;
         private Label lb5;
         private Button bt1;
-        private TextBox tb1;
-        private TextBox tb2;
-        private TextBox tb3;
-        private TextBox tb5;
-        private TextBox tb6;
-        private DateTimePicker dtp1;
+        private TextBox nameTextBox;
+        private TextBox authorTextBox;
+        private TextBox publisherTextBox;
+        private TextBox priceTextBox;
+        private TextBox quantityTextBox;
+        private DateTimePicker purchaseDatePicker;
         private ErrorProvider errorProvider1;
     }
 }
