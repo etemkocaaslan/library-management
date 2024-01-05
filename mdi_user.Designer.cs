@@ -39,11 +39,8 @@
             viewStudentToolStripMenuItem = new ToolStripMenuItem();
             stockToolStripMenuItem = new ToolStripMenuItem();
             viewStockToolStripMenuItem = new ToolStripMenuItem();
-            statusStrip = new StatusStrip();
-            toolStripStatusLabel = new ToolStripStatusLabel();
             toolTip = new ToolTip(components);
             menuStrip.SuspendLayout();
-            statusStrip.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip
@@ -52,7 +49,7 @@
             menuStrip.Location = new Point(0, 0);
             menuStrip.Name = "menuStrip";
             menuStrip.Padding = new Padding(7, 2, 0, 2);
-            menuStrip.Size = new Size(737, 24);
+            menuStrip.Size = new Size(471, 24);
             menuStrip.TabIndex = 0;
             menuStrip.Text = "MenuStrip";
             // 
@@ -116,32 +113,15 @@
             // viewStockToolStripMenuItem
             // 
             viewStockToolStripMenuItem.Name = "viewStockToolStripMenuItem";
-            viewStockToolStripMenuItem.Size = new Size(180, 22);
+            viewStockToolStripMenuItem.Size = new Size(130, 22);
             viewStockToolStripMenuItem.Text = "View stock";
             viewStockToolStripMenuItem.Click += ViewStockToolStripMenuItem_Click;
-            // 
-            // statusStrip
-            // 
-            statusStrip.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel });
-            statusStrip.Location = new Point(0, 501);
-            statusStrip.Name = "statusStrip";
-            statusStrip.Padding = new Padding(1, 0, 16, 0);
-            statusStrip.Size = new Size(737, 22);
-            statusStrip.TabIndex = 2;
-            statusStrip.Text = "StatusStrip";
-            // 
-            // toolStripStatusLabel
-            // 
-            toolStripStatusLabel.Name = "toolStripStatusLabel";
-            toolStripStatusLabel.Size = new Size(39, 17);
-            toolStripStatusLabel.Text = "Status";
             // 
             // MDIuser
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(737, 523);
-            Controls.Add(statusStrip);
+            ClientSize = new Size(471, 481);
             Controls.Add(menuStrip);
             IsMdiContainer = true;
             MainMenuStrip = menuStrip;
@@ -150,8 +130,6 @@
             Text = "mdi_user";
             menuStrip.ResumeLayout(false);
             menuStrip.PerformLayout();
-            statusStrip.ResumeLayout(false);
-            statusStrip.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -159,8 +137,6 @@
 
 
         private MenuStrip menuStrip;
-        private StatusStrip statusStrip;
-        private ToolStripStatusLabel toolStripStatusLabel;
         private ToolTip toolTip;
         private ToolStripMenuItem booksToolStripMenuItem;
         private ToolStripMenuItem addNewBooksToolStripMenuItem;
