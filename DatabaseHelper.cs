@@ -25,13 +25,13 @@ namespace LibraryManagement
         public static DataTable ExecuteQuery(string query, params SqlParameter[] parameters)
         {
             EnsureConnection();
-            DataTable dataTable = new DataTable();
+            var dataTable = new DataTable();
 
             try
             {
-                using SqlCommand command = new SqlCommand(query, connection);
+                using var command = new SqlCommand(query, connection);
                 command.Parameters.AddRange(parameters);
-                using SqlDataAdapter adapter = new SqlDataAdapter(command);
+                using var adapter = new SqlDataAdapter(command);
                 adapter.Fill(dataTable);
             }
             catch (SqlException e)
@@ -54,7 +54,7 @@ namespace LibraryManagement
             EnsureConnection();
             try
             {
-                using SqlCommand command = new SqlCommand(commandText, connection);
+                using var command = new SqlCommand(commandText, connection);
                 command.Parameters.AddRange(parameters);
                 return command.ExecuteNonQuery();
             }
@@ -71,7 +71,7 @@ namespace LibraryManagement
         private static void EnsureConnection()
         {
             if (connection == null)
-                throw new InvalidOperationException("Connection must be initialized first.");
+                throw new InvalidOperationException("The connection must be initialized first.");
 
             if (connection.State != ConnectionState.Open)
                 connection.Open();
