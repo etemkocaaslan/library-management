@@ -1,4 +1,4 @@
-﻿namespace WinFormsApp2
+﻿namespace LibraryManagement
 {
     public partial class MDIuser : Form
     {
@@ -100,7 +100,7 @@
 
         private void AddNewBooksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddBook addBooks = new();
+            AddBookForm addBooks = new();
             addBooks.Show();
         }
 
@@ -112,7 +112,7 @@
 
         private void AddStudentToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddStudent addStudent = new();
+            AddStudentForm addStudent = new();
             addStudent.Show();
         }
 
@@ -137,6 +137,11 @@
         {
             BookStock bookStock = new BookStock();
             bookStock.Show();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

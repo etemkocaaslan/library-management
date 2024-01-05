@@ -1,7 +1,7 @@
 using System.Data.SqlClient;
 using System.Data;
 
-namespace WinFormsApp2
+namespace LibraryManagement
 {
     public partial class Login : Form
     {

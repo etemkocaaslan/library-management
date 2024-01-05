@@ -1,8 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
-using System.Net.Mail;
-
-namespace WinFormsApp2
+namespace LibraryManagement
 {
     public partial class BookStock : Form
     {
@@ -58,11 +56,6 @@ namespace WinFormsApp2
             {
                 MessageBox.Show($"Error: {ex.Message}");
             }
-        }
-
-        private void Bt2_Click(object sender, EventArgs e)
-        {
-            //email logic
         }
 
         private void Dgw2_CellClick(object sender, DataGridViewCellEventArgs e)

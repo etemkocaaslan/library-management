@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace WinFormsApp2
+namespace LibraryManagement
 {
     internal static class FileManager
     {

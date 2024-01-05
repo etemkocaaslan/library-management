@@ -1,6 +1,6 @@
 ﻿using System.Data.SqlClient;
 
-namespace WinFormsApp2
+namespace LibraryManagement
 {
     public partial class AddBookForm : Form
     {

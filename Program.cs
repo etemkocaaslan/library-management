@@ -1,4 +1,4 @@
-namespace WinFormsApp2
+namespace LibraryManagement
 {
     internal static class Program
     {
