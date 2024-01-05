@@ -7,6 +7,7 @@ namespace LibraryManagement
         public AddBookForm()
         {
             InitializeComponent();
+            DatabaseHelper.InitializeConnection("Data Source=DESKTOP-SR937O1;Initial Catalog=libmanag;Integrated Security=True");
         }
 
         /// <summary>
