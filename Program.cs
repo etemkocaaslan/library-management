@@ -28,7 +28,7 @@ namespace LibraryManagement
         /// </summary>
         private static void RunApplication()
         {
-            Application.Run(new Login()); // Consider using dependency injection or other patterns for flexibility
+            Application.Run(new Login());
         }
     }
 }
