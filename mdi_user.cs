@@ -124,7 +124,7 @@
 
         private void NewIssueToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            IssueBook issueBook = new IssueBook();
+            IssueBookForm issueBook = new IssueBookForm();
             issueBook.Show();
         }
 

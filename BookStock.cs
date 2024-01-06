@@ -56,7 +56,7 @@ namespace LibraryManagement
             }
         }
 
-        private void booksGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void BooksGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (IsValidGridCell(e))
             {

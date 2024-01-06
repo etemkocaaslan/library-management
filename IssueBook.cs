@@ -3,11 +3,11 @@ using System.Data.SqlClient;
 
 namespace LibraryManagement
 {
-    public partial class IssueBook : Form
+    public partial class IssueBookForm : Form
     {
         private List<SqlParameter[]> paramatersList = new();
 
-        public IssueBook()
+        public IssueBookForm()
         {
             InitializeComponent();
             DatabaseHelper.InitializeConnection("Data Source=DESKTOP-SR937O1;Initial Catalog=libmanag;Integrated Security=True");
@@ -21,7 +21,7 @@ namespace LibraryManagement
                 string query = "SELECT * FROM issue_books WHERE student_enrollment_no LIKE @student_enrollment_no";
                 SqlParameter[] parameters = new[]
                 {
-                    new SqlParameter("@student_enrollment_no", tb1.Text)
+                    new SqlParameter("@student_enrollment_no", studentSearchTextBox.Text)
                 };
 
                 issuedbooksDT = DatabaseHelper.ExecuteQuery(query, parameters);
@@ -36,9 +36,9 @@ namespace LibraryManagement
                 lv1.Items.Add(row["book_id"] + "-" + row["book_name"].ToString());
             }
         }
-        private async void CheckStudent(object sender, EventArgs e)
+        private async void CheckStudentButton_Click(object sender, EventArgs e)
         {
-            if (tb1.TextLength > 0)
+            if (studentSearchTextBox.TextLength > 0)
             {
                 DataTable paramatersList = new();
                 try
@@ -46,7 +46,7 @@ namespace LibraryManagement
                     string query = "SELECT * FROM Student WHERE enrollment_no LIKE @enrollment_no";
                     SqlParameter[] parameters = new[]
                     {
-                        new SqlParameter("@enrollment_no", tb2.Text)
+                        new SqlParameter("@enrollment_no", bookSearchTextBox.Text)
                     };
 
                     paramatersList = await Task.Run(() => DatabaseHelper.ExecuteQuery(query, parameters));
@@ -85,7 +85,7 @@ namespace LibraryManagement
                 string commandTxt = "SELECT id FROM books_info WHERE name = @name";
                 SqlParameter[] parameters = new[]
                 {
-                    new SqlParameter("@name", tb2.Text)
+                    new SqlParameter("@name", bookSearchTextBox.Text)
                 };
 
                 issuedbooksDT = DatabaseHelper.ExecuteQuery(commandTxt, parameters);
@@ -98,7 +98,7 @@ namespace LibraryManagement
             if (issuedbooksDT.Rows.Count > 0)
             {
                 DataRow row = issuedbooksDT.Rows[0];
-                lv2.Items.Add(row["id"].ToString() + "-" + tb2.Text);
+                lv2.Items.Add(row["id"].ToString() + "-" + bookSearchTextBox.Text);
             }
             else
             {
@@ -109,20 +109,20 @@ namespace LibraryManagement
         private void AddToChartButtonClick(object sender, EventArgs e)
         {
             UpdateChart();
-            tb2.Clear();
+            bookSearchTextBox.Clear();
         }
 
         private SqlParameter[] GetParametersFromListView(ListViewItem listViewItem)
         {
             return new SqlParameter[]
             {
-                new SqlParameter("@student_enrollment_no", tb1.Text.TrimEnd()),
+                new SqlParameter("@student_enrollment_no", studentSearchTextBox.Text.TrimEnd()),
                 new SqlParameter("@book_id", listViewItem.Text.Split('-')[0].Trim()),
                 new SqlParameter("@book_name", listViewItem.Text.Split('-')[1].Trim()),
                 new SqlParameter("@issue_date", dtp1.Text)
             };
         }
-        private void IssueButtonClick(object sender, EventArgs e)
+        private void IssueBooksButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -187,7 +187,7 @@ namespace LibraryManagement
 
             return Convert.ToInt32(issuedbooksDT.Rows[0]["available"]) > 0;
         }
-        private void SearchKeyUp(object sender, KeyEventArgs e)
+        private void SearchBook_KeyUp(object sender, KeyEventArgs e)
         {
             lbx1.Visible = true;
 
@@ -198,7 +198,7 @@ namespace LibraryManagement
                 string query = "SELECT * FROM books_info WHERE name LIKE @name";
                 SqlParameter[] parameters = new[]
                 {
-                    new SqlParameter("@name", "%" + tb2.Text + "%")
+                    new SqlParameter("@name", "%" + bookSearchTextBox.Text + "%")
                 };
                 issuedbooksDT = DatabaseHelper.ExecuteQuery(query, parameters);
 
@@ -219,7 +219,7 @@ namespace LibraryManagement
         private void ListViewBoxDoubleClick(object sender, EventArgs e)
         {
             lbx1.Visible = false;
-            tb2.Text = lbx1.Text.TrimEnd();
+            bookSearchTextBox.Text = lbx1.Text.TrimEnd();
         }
     }
 }

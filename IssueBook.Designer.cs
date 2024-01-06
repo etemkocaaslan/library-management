@@ -1,6 +1,6 @@
 ﻿namespace LibraryManagement
 {
-    partial class IssueBook
+    partial class IssueBookForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,12 +31,12 @@
             pn1 = new Panel();
             bt2 = new Button();
             lbx1 = new ListBox();
-            tb2 = new TextBox();
+            bookSearchTextBox = new TextBox();
             lb3 = new Label();
             dtp1 = new DateTimePicker();
             lb2 = new Label();
             bt1 = new Button();
-            tb1 = new TextBox();
+            studentSearchTextBox = new TextBox();
             lb1 = new Label();
             lv1 = new ListView();
             lv2 = new ListView();
@@ -53,7 +53,7 @@
             pn1.BorderStyle = BorderStyle.FixedSingle;
             pn1.Controls.Add(bt2);
             pn1.Controls.Add(lbx1);
-            pn1.Controls.Add(tb2);
+            pn1.Controls.Add(bookSearchTextBox);
             pn1.Controls.Add(lb3);
             pn1.Controls.Add(dtp1);
             pn1.Controls.Add(lb2);
@@ -90,16 +90,16 @@
             lbx1.Visible = false;
             lbx1.DoubleClick += ListViewBoxDoubleClick;
             // 
-            // tb2
+            // bookSearchTextBox
             // 
-            tb2.BackColor = Color.White;
-            tb2.BorderStyle = BorderStyle.FixedSingle;
-            tb2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            tb2.Location = new Point(56, 97);
-            tb2.Name = "tb2";
-            tb2.Size = new Size(292, 23);
-            tb2.TabIndex = 23;
-            tb2.KeyUp += SearchKeyUp;
+            bookSearchTextBox.BackColor = Color.White;
+            bookSearchTextBox.BorderStyle = BorderStyle.FixedSingle;
+            bookSearchTextBox.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            bookSearchTextBox.Location = new Point(56, 97);
+            bookSearchTextBox.Name = "bookSearchTextBox";
+            bookSearchTextBox.Size = new Size(292, 23);
+            bookSearchTextBox.TabIndex = 23;
+            bookSearchTextBox.KeyUp += SearchBook_KeyUp;
             // 
             // lb3
             // 
@@ -141,15 +141,15 @@
             bt1.TabIndex = 19;
             bt1.Text = "SEARCH";
             bt1.UseVisualStyleBackColor = false;
-            bt1.Click += CheckStudent;
+            bt1.Click += CheckStudentButton_Click;
             // 
-            // tb1
+            // studentSearchTextBox
             // 
-            tb1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            tb1.Location = new Point(415, 9);
-            tb1.Name = "tb1";
-            tb1.Size = new Size(192, 29);
-            tb1.TabIndex = 18;
+            studentSearchTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            studentSearchTextBox.Location = new Point(415, 9);
+            studentSearchTextBox.Name = "studentSearchTextBox";
+            studentSearchTextBox.Size = new Size(192, 29);
+            studentSearchTextBox.TabIndex = 18;
             // 
             // lb1
             // 
@@ -218,7 +218,7 @@
             bt3.Text = "Issue";
             bt3.UseVisualStyleBackColor = false;
             bt3.Visible = false;
-            bt3.Click += IssueButtonClick;
+            bt3.Click += IssueBooksButton_Click;
             // 
             // IssueBook
             // 
@@ -231,7 +231,7 @@
             Controls.Add(lv2);
             Controls.Add(lv1);
             Controls.Add(bt1);
-            Controls.Add(tb1);
+            Controls.Add(studentSearchTextBox);
             Controls.Add(lb1);
             Controls.Add(pn1);
             Name = "IssueBook";
@@ -249,9 +249,9 @@
         private Label lb2;
         private Label lb3;
         private Button bt1;
-        private TextBox tb1;
+        private TextBox studentSearchTextBox;
         private Label lb1;
-        private TextBox tb2;
+        private TextBox bookSearchTextBox;
         private ListBox lbx1;
         private ListView lv1;
         private ListView lv2;

@@ -52,7 +52,7 @@
             booksGridView.RowTemplate.Height = 25;
             booksGridView.Size = new Size(592, 184);
             booksGridView.TabIndex = 0;
-            booksGridView.CellClick += booksGridView_CellClick;
+            booksGridView.CellClick += BooksGridView_CellClick;
             // 
             // Dgw2
             // 
@@ -62,7 +62,7 @@
             issuesGridView.RowTemplate.Height = 25;
             issuesGridView.Size = new Size(592, 184);
             issuesGridView.TabIndex = 1;
-            issuesGridView.CellClick += issuesGridView_CellClick;
+            //issuesGridView.CellClick += IssuesGridView_CellClick;
             // 
             // bt1
             // 
