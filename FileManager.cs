@@ -14,7 +14,22 @@ namespace LibraryManagement
 
         public static Bitmap? GetImage()
         {
-            return (openImageFileDialog.ShowDialog() == DialogResult.OK) ? new Bitmap(openImageFileDialog.FileName) : null;
+            if (IsFileDialogSuccessful())
+            {
+                return LoadImageFromFile();
+            }
+            return null;
         }
+
+        private static bool IsFileDialogSuccessful()
+        {
+            return openImageFileDialog.ShowDialog() == DialogResult.OK;
+        }
+
+        private static Bitmap LoadImageFromFile()
+        {
+            return new Bitmap(openImageFileDialog.FileName);
+        }
+
     }
 }
