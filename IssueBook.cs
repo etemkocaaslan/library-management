@@ -12,70 +12,76 @@ namespace LibraryManagement
             InitializeComponent();
             DatabaseHelper.InitializeConnection("Data Source=DESKTOP-SR937O1;Initial Catalog=libmanag;Integrated Security=True");
         }
-
-        private void BarrowedCheck()
+        private void CheckStudentButton_Click(object sender, EventArgs e)
         {
-            DataTable issuedbooksDT = new();
-            try
+            if (IsValidStudentSearch())
             {
-                string query = "SELECT * FROM issue_books WHERE student_enrollment_no LIKE @student_enrollment_no";
-                SqlParameter[] parameters = new[]
-                {
-                    new SqlParameter("@student_enrollment_no", studentSearchTextBox.Text)
-                };
-
-                issuedbooksDT = DatabaseHelper.ExecuteQuery(query, parameters);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            foreach (DataRow row in issuedbooksDT.Rows)
-            {
-                lv1.Items.Add(row["book_id"] + "-" + row["book_name"].ToString());
-            }
-        }
-        private async void CheckStudentButton_Click(object sender, EventArgs e)
-        {
-            if (studentSearchTextBox.TextLength > 0)
-            {
-                DataTable paramatersList = new();
-                try
-                {
-                    string query = "SELECT * FROM Student WHERE enrollment_no LIKE @enrollment_no";
-                    SqlParameter[] parameters = new[]
-                    {
-                        new SqlParameter("@enrollment_no", bookSearchTextBox.Text)
-                    };
-
-                    paramatersList = await Task.Run(() => DatabaseHelper.ExecuteQuery(query, parameters));
-                    pn1.Visible = true;
-
-                    lv1.Clear();
-                    BarrowedCheck();
-                    lb4.Visible = true;
-                    lb5.Visible = true;
-                    lv1.Visible = true;
-                    lv2.Visible = true;
-                    bt3.Visible = true;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                DisplayStudentInformation();
             }
             else
             {
-                pn1.Visible = false;
-                lb4.Visible = false;
-                lb5.Visible = false;
-                lv1.Visible = false;
-                lv2.Visible = false;
-                bt3.Visible = false;
+                HideStudentInformation();
             }
-
         }
+        private bool IsValidStudentSearch()
+        {
+            return !string.IsNullOrWhiteSpace(studentSearchTextBox.Text);
+        }
+
+        private void DisplayStudentInformation()
+        {
+            LoadIssuedBooksForStudent();
+            ShowStudentInformationPanels();
+        }
+        private async void LoadIssuedBooksForStudent()
+        {
+            try
+            {
+                var issuedBooks = await FetchIssuedBooksAsync();
+                PopulateIssuedBooksListView(issuedBooks);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load issued books: " + ex.Message);
+            }
+        }
+        private async Task<DataTable> FetchIssuedBooksAsync()
+        {
+            string query = "SELECT * FROM issue_books WHERE student_enrollment_no LIKE @student_enrollment_no";
+            SqlParameter[] parameters = new[]
+            {
+                new SqlParameter("@student_enrollment_no", studentSearchTextBox.Text)
+            };
+
+            return await Task.Run(() => DatabaseHelper.ExecuteQuery(query, parameters));
+        }
+        private void PopulateIssuedBooksListView(DataTable issuedBooks)
+        {
+            lv1.Items.Clear();
+            foreach (DataRow row in issuedBooks.Rows)
+            {
+                lv1.Items.Add($"{row["book_id"]}-{row["book_name"]}");
+            }
+        }
+        private void ShowStudentInformationPanels()
+        {
+            pn1.Visible = true;
+            lb4.Visible = true;
+            lb5.Visible = true;
+            lv1.Visible = true;
+            lv2.Visible = true;
+            bt3.Visible = true;
+        }
+        private void HideStudentInformation()
+        {
+            pn1.Visible = false;
+            lb4.Visible = false;
+            lb5.Visible = false;
+            lv1.Visible = false;
+            lv2.Visible = false;
+            bt3.Visible = false;
+        }
+
 
         private void UpdateChart()
         {
@@ -213,9 +219,6 @@ namespace LibraryManagement
                 MessageBox.Show(ex.Message);
             }
         }
-
-
-
         private void ListViewBoxDoubleClick(object sender, EventArgs e)
         {
             lbx1.Visible = false;
