@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace LibraryManagement
+namespace LibraryManagement.Source.Helpers
 {
     internal static class FileManager
     {

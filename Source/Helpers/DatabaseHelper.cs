@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 
-namespace LibraryManagement
+namespace LibraryManagement.Source.Helpers
 {
     internal static class DatabaseHelper
     {
