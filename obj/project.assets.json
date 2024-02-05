@@ -273,15 +273,6 @@
             "rid": "win"
           }
         }
-      },
-      "LibraryManagement.UnitTests/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/LibraryManagement.UnitTests.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/LibraryManagement.UnitTests.dll": {}
-        }
       }
     }
   },
@@ -818,16 +809,10 @@
         "system.text.encoding.codepages.nuspec",
         "useSharedDesignerContext.txt"
       ]
-    },
-    "LibraryManagement.UnitTests/1.0.0": {
-      "type": "project",
-      "path": "../LibraryManagement.UnitTests/LibraryManagement.UnitTests.csproj",
-      "msbuildProject": "../LibraryManagement.UnitTests/LibraryManagement.UnitTests.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0-windows7.0": [
-      "LibraryManagement.UnitTests >= 1.0.0",
       "MailKit >= 4.3.0",
       "System.Data.SqlClient >= 4.8.6"
     ]
@@ -864,11 +849,7 @@
       "frameworks": {
         "net7.0-windows7.0": {
           "targetAlias": "net7.0-windows",
-          "projectReferences": {
-            "C:\\Users\\kasla\\MyProjects\\library_management\\LibraryManagement.UnitTests\\LibraryManagement.UnitTests.csproj": {
-              "projectPath": "C:\\Users\\kasla\\MyProjects\\library_management\\LibraryManagement.UnitTests\\LibraryManagement.UnitTests.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
