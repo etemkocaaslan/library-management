@@ -33,8 +33,4 @@
     <Folder Include="Source\Models\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\LibraryManagement.UnitTests\LibraryManagement.UnitTests.csproj" />
-  </ItemGroup>
-
 </Project>
