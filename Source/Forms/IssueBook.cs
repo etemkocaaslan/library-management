@@ -11,7 +11,7 @@ namespace LibraryManagement
         public IssueBookForm()
         {
             InitializeComponent();
-            DatabaseHelper.InitializeConnection("Data Source=DESKTOP-SR937O1;Initial Catalog=libmanag;Integrated Security=True");
+            DatabaseHelper.InitializeConnection("Data Source=DESKTOP-SR937O1;Initial Catalog=libmanag;Integrated Security=True; TrustServerCertificate=True;");
         }
         private void CheckStudentButton_Click(object sender, EventArgs e)
         {
