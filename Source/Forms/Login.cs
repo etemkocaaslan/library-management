@@ -15,7 +15,7 @@ namespace LibraryManagement
         private async void Bt1_Click(object sender, EventArgs e)
         {
             string query = "SELECT * from library_person WHERE username = @username and password = @password";
-            SqlParameter[] parameters = new SqlParameter[] 
+            SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@username", tb1.Text),
                 new SqlParameter("Password", tb2.Text)
