@@ -4,21 +4,6 @@
     "C:\\Users\\kasla\\MyProjects\\library_management\\WinFormsApp2\\LibraryManagement.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kasla\\MyProjects\\library_management\\LibraryManagement.UnitTests\\LibraryManagement.UnitTests.csproj": {
-      "restore": {
-        "projectUniqueName": "C:\\Users\\kasla\\MyProjects\\library_management\\LibraryManagement.UnitTests\\LibraryManagement.UnitTests.csproj",
-        "projectName": "LibraryManagement.UnitTests",
-        "projectPath": "C:\\Users\\kasla\\MyProjects\\library_management\\LibraryManagement.UnitTests\\LibraryManagement.UnitTests.csproj",
-        "frameworks": {
-          "net472": {
-            "projectReferences": {}
-          }
-        }
-      },
-      "frameworks": {
-        "net472": {}
-      }
-    },
     "C:\\Users\\kasla\\MyProjects\\library_management\\WinFormsApp2\\LibraryManagement.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -47,11 +32,7 @@
         "frameworks": {
           "net7.0-windows7.0": {
             "targetAlias": "net7.0-windows",
-            "projectReferences": {
-              "C:\\Users\\kasla\\MyProjects\\library_management\\LibraryManagement.UnitTests\\LibraryManagement.UnitTests.csproj": {
-                "projectPath": "C:\\Users\\kasla\\MyProjects\\library_management\\LibraryManagement.UnitTests\\LibraryManagement.UnitTests.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {
